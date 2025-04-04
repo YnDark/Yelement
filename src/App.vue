@@ -12,7 +12,7 @@ onMounted(() => {
 
 <template>
   <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-  <Button type="primary" plain ref="buttoni"></Button>
+  <Button style="width: 100px; height: 100px;" type="primary" plain ref="buttoni"></Button>
 
 </template>
 

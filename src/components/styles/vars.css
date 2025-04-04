@@ -1,0 +1,104 @@
+:root {
+  --yn-color-white: #ffffff;
+  --yn-color-black: #000000;
+  --yn-color-primary: #409eff;
+  --yn-color-primary-light-3: rgb(50.8, 116.6, 184.5);
+  --yn-color-primary-light-5: rgb(42, 89, 137.5);
+  --yn-color-primary-light-7: rgb(33.2, 61.4, 90.5);
+  --yn-color-primary-light-8: rgb(28.8, 47.6, 67);
+  --yn-color-primary-light-9: rgb(24.4, 33.8, 43.5);
+  --yn-color-primary-dark-2: rgb(102.2, 177.4, 255);
+  --yn-color-success: #67c23a;
+  --yn-color-success-light-3: rgb(78.1, 141.8, 46.6);
+  --yn-color-success-light-5: rgb(61.5, 107, 39);
+  --yn-color-success-light-7: rgb(44.9, 72.2, 31.4);
+  --yn-color-success-light-8: rgb(36.6, 54.8, 27.6);
+  --yn-color-success-light-9: rgb(28.3, 37.4, 23.8);
+  --yn-color-success-dark-2: rgb(133.4, 206.2, 97.4);
+  --yn-color-warning: #e6a23c;
+  --yn-color-warning-light-3: rgb(167, 119.4, 48);
+  --yn-color-warning-light-5: #7d5b28;
+  --yn-color-warning-light-7: rgb(83, 62.6, 32);
+  --yn-color-warning-light-8: rgb(62, 48.4, 28);
+  --yn-color-warning-light-9: rgb(41, 34.2, 24);
+  --yn-color-warning-dark-2: rgb(235, 180.6, 99);
+  --yn-color-danger: #f56c6c;
+  --yn-color-danger-light-3: rgb(177.5, 81.6, 81.6);
+  --yn-color-danger-light-5: rgb(132.5, 64, 64);
+  --yn-color-danger-light-7: rgb(87.5, 46.4, 46.4);
+  --yn-color-danger-light-8: rgb(65, 37.6, 37.6);
+  --yn-color-danger-light-9: rgb(42.5, 28.8, 28.8);
+  --yn-color-danger-dark-2: rgb(247, 137.4, 137.4);
+  --yn-color-error: #f56c6c;
+  --yn-color-error-light-3: rgb(177.5, 81.6, 81.6);
+  --yn-color-error-light-5: rgb(132.5, 64, 64);
+  --yn-color-error-light-7: rgb(87.5, 46.4, 46.4);
+  --yn-color-error-light-8: rgb(65, 37.6, 37.6);
+  --yn-color-error-light-9: rgb(42.5, 28.8, 28.8);
+  --yn-color-error-dark-2: rgb(247, 137.4, 137.4);
+  --yn-color-info: #909399;
+  --yn-color-info-light-3: rgb(106.8, 108.9, 113.1);
+  --yn-color-info-light-5: rgb(82, 83.5, 86.5);
+  --yn-color-info-light-7: rgb(57.2, 58.1, 59.9);
+  --yn-color-info-light-8: rgb(44.8, 45.4, 46.6);
+  --yn-color-info-light-9: rgb(32.4, 32.7, 33.3);
+  --yn-color-info-dark-2: rgb(166.2, 168.6, 173.4);
+
+  --yn-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.36), 0px 8px 20px rgba(0, 0, 0, 0.72);
+  --yn-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.72);
+  --yn-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.72);
+  --yn-box-shadow-dark:
+    0px 16px 48px 16px rgba(0, 0, 0, 0.72), 0px 12px 32px #000000, 0px 8px 16px -8px #000000;
+
+  --yn-bg-color-page: #0a0a0a;
+  --yn-bg-color: #141414;
+  --yn-bg-color-overlay: #1d1e1f;
+
+  --yn-text-color-primary: #e5eaf3;
+  --yn-text-color-regular: #cfd3dc;
+  --yn-text-color-secondary: #a3a6ad;
+  --yn-text-color-placeholder: #8d9095;
+  --yn-text-color-disabled: #6c6e72;
+
+  --yn-border-color-darker: #636466;
+  --yn-border-color-dark: #58585b;
+  --yn-border-color: #4c4d4f;
+  --yn-border-color-light: #414243;
+  --yn-border-color-lighter: #363637;
+  --yn-border-color-extra-light: #2b2b2c;
+  --yn-border-radius-base: 4px;
+  --yn-border-radius-small: 2px;
+  --yn-border-radius-round: 20px;
+  --yn-border-radius-circle: 100%;
+  --yn-border-style: solid;
+  --yn-border-width: 1px;
+  --yn-border-color-hover: var(--el-text-color-disabled);
+  --yn-border: var(--el-border-width) var(--el-border-style) var(--el-border-color);
+
+  --yn-fill-color-darker: #424243;
+  --yn-fill-color-dark: #39393a;
+  --yn-fill-color: #303030;
+  --yn-fill-color-light: #262727;
+  --yn-fill-color-lighter: #1d1d1d;
+  --yn-fill-color-extra-light: #191919;
+  --yn-fill-color-blank: transparent;
+
+  --yn-mask-color: rgba(0, 0, 0, 0.8);
+  --yn-mask-color-extra-light: rgba(0, 0, 0, 0.3);
+
+  --yn-font-size-extra-large: 20px;
+  --yn-font-size-large: 18px;
+  --yn-font-size-medium: 16px;
+  --yn-font-size-base: 14px;
+  --yn-font-size-small: 13px;
+  --yn-font-size-extra-small: 12px;
+  --yn-font-family:
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑',
+    Arial, sans-serif;
+  --yn-font-weight-primary: 500;
+  --yn-font-line-height-primary: 24px;
+
+  --yn-disabled-bg-color: var(--yn-fill-color-light);
+  --yn-disabled-text-color: var(--yn-text-color-placeholder);
+  --yn-disabled-border-color: var(--yn-border-color-light);
+}

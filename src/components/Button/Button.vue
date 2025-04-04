@@ -33,4 +33,8 @@ defineExpose({
 
 
 </script>
-<style scoped></style>
+<style scoped>
+.yd-button{
+  background-color: var(--yn-color-primary);
+}
+</style>
