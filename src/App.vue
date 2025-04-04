@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import Button from './components/Button/Button.vue'
+import type { ButtonInstance } from './components/Button/types.ts';
+const buttoni = ref<ButtonInstance | null>(null)
+onMounted(() => {
+  if (buttoni.value) {
+    console.log(buttoni.value.ref)
+  }
+})
 </script>
 
 <template>
   <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-  <Button type="primary" plain></Button>
+  <Button type="primary" plain ref="buttoni"></Button>
 
 </template>
 
