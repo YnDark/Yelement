@@ -1,0 +1,73 @@
+:root {
+  /* colors */
+  --yd-color-white: #ffffff;
+  --yd-color-black: #000000;
+  --colors: (
+    primary: #409eff,
+    success: #67c23a,
+    warning: #e6a23c,
+    danger: #f56c6c,
+    info: #909399
+  );
+
+  @each $val, $color in var(--colors) {
+    --yd-color-$(val): $(color);
+    @for $i from 3 to 9 by 2 {
+      --yd-color-$(val)-light-$(i): mix(#fff, $(color), .$(i))
+    }
+    --yd-color-$(val)-light-8: mix(#fff, $(color), .8);
+    --yd-color-$(val)-dark-2: mix(#000, $(color), .2);
+  }
+
+  --yd-bg-color: #ffffff;
+  --yd-bg-color-page: #f2f3f5;
+  --yd-bg-color-overlay: #ffffff;
+  --yd-text-color-primary: #303133;
+  --yd-text-color-regular: #606266;
+  --yd-text-color-secondary: #909399;
+  --yd-text-color-placeholder: #a8abb2;
+  --yd-text-color-disabled: #c0c4cc;
+  --yd-border-color: #dcdfe6;
+  --yd-border-color-light: #e4e7ed;
+  --yd-border-color-lighter: #ebeef5;
+  --yd-border-color-extra-light: #f2f6fc;
+  --yd-border-color-dark: #d4d7de;
+  --yd-border-color-darker: #cdd0d6;
+  --yd-fill-color: #f0f2f5;
+  --yd-fill-color-light: #f5f7fa;
+  --yd-fill-color-lighter: #fafafa;
+  --yd-fill-color-extra-light: #fafcff;
+  --yd-fill-color-dark: #ebedf0;
+  --yd-fill-color-darker: #e6e8eb;
+  --yd-fill-color-blank: #ffffff;
+
+  /* border */
+  --yd-border-width: 1px;
+  --yd-border-style: solid;
+  --yd-border-color-hover: var(--yd-text-color-disabled);
+  --yd-border: var(--yd-border-width) var(--yd-border-style) var(--yd-border-color);
+  --yd-border-radius-base: 4px;
+  --yd-border-radius-small: 2px;
+  --yd-border-radius-round: 20px;
+  --yd-border-radius-circle: 100%;
+
+  /*font*/
+  --yd-font-size-extra-large: 20px;
+  --yd-font-size-large: 18px;
+  --yd-font-size-medium: 16px;
+  --yd-font-size-base: 14px;
+  --yd-font-size-small: 13px;
+  --yd-font-size-extra-small: 12px;
+  --yd-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+  --yd-font-weight-primary: 500;
+
+  /*disabled*/
+  --yd-disabled-bg-color: var(--yd-fill-color-light);
+  --yd-disabled-text-color: var(--yd-text-color-placeholder);
+  --yd-disabled-border-color: var(--yd-border-color-light);
+
+  /*animation*/
+  --yd-transition-duration: .3s;
+  --yd-transition-duration-fast: .2s;
+
+}

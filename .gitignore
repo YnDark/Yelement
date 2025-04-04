@@ -27,4 +27,6 @@ coverage
 *.sln
 *.sw?
 
-*.tsbuildinfo
+#Vitepress
+docs/.vitepress/cache
+docs/.vitepress/dist

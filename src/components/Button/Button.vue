@@ -15,7 +15,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, withDefaults, ref } from 'vue';
-
+import './style.css'
 export default defineComponent({
   name: "YButton",
 })
@@ -34,7 +34,5 @@ defineExpose({
 
 </script>
 <style scoped>
-.yd-button{
-  background-color: var(--yn-color-primary);
-}
+
 </style>
