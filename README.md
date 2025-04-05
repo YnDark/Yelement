@@ -8,7 +8,6 @@ Vue3、TypeScript、Vite、Eslint
 
 <h2 id="CroOi">项目使用教程</h2>
 <h2 id="syRAa">项目文件结构</h2>
-![](https://cdn.nlark.com/yuque/0/2025/png/48383960/1743821796487-bd6666b5-1833-4647-9dbf-e41a7bcc3840.png)
 
 ```plain
 ├── .vscode/                # VSCode编辑器配置
