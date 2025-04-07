@@ -6,11 +6,16 @@ import Collapse from './components/Collapse/Collapse.vue';
 import Icon from './components/Icon/Icon.vue';
 import CollapseItem from './components/Collapse/CollapseItem.vue';
 import Alert from './components/Alert/Alert.vue';
+import type { AlertInstance } from './components/Alert/types';
 const buttoni = ref<ButtonInstance | null>(null)
+const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
 onMounted(() => {
   if (buttoni.value) {
     console.log(buttoni.value.ref)
+  }
+  if(alertInstance.value){
+    console.log(alertInstance.value.close)
   }
 })
 </script>
@@ -64,10 +69,10 @@ onMounted(() => {
     </Collapse>
   </div>
   <div>
-    <Alert title="标题" type="primary" align="center" closable>
+    <Alert title="标题" type="primary" align="center" closable ref="alertInstance">
       <template #header>标题1</template>
       <div>
-        描述
+        <h1>描述</h1>
       </div>
     </Alert>
     <Alert title="标题" type="warning" align="left" closable>

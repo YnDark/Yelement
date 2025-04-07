@@ -7,5 +7,9 @@ export interface alertProps{
   closable?: boolean
 }
 export interface ColseEmits{
-  (e:MouseEvent):void
+  (e:'close'):void
+}
+
+export interface AlertInstance{
+  close:()=>void
 }

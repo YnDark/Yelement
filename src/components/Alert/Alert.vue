@@ -10,6 +10,9 @@ const isShow = ref(true)
 const handleClose = () => {
   isShow.value = false
 }
+defineExpose({
+  close:handleClose
+})
 </script>
 <template>
   <Transition name="fade">
