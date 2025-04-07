@@ -31,7 +31,7 @@ onMounted(() => {
     <Button type="info" size="large" >test button</Button>
     <Button type="info" size="small" disabled>test button</Button>
   </div>
-    <Collapse v-model="openValue" according>
+    <Collapse v-model="openValue">
       <CollapseItem name="a">
         <template #title>
           <h1>title1</h1>
@@ -49,6 +49,9 @@ onMounted(() => {
         </div>
       </CollapseItem>
       <CollapseItem name="c" title="标题三">
+        <template #title>
+          <h1>title3</h1>
+        </template>
         <div>
           内容3
         </div>

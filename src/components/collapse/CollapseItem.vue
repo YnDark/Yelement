@@ -2,6 +2,7 @@
 import type { CollapseItemProps } from './types';
 import { inject,computed } from 'vue';
 import { collapseContextKey } from './types';
+import './style.css'
 defineOptions({
   name:'yd-collapse-item'
 })
@@ -12,22 +13,47 @@ const handleClick = ()=>{
   if(props.disabled){return}
   collapseContext?.handleItemClick(props.name)
 }
+const transitionEvents:Record<string,(el: HTMLElement)=>void> = {
+  beforeEnter(el){
+    el.style.height = '0px'
+  },
+  enter(el){
+    el.style.height = `${el.scrollHeight}px`
+  },
+  afterEnter(el){
+    el.style.height = ''
+  },
+  beforeLeave(el){
+    el.style.height = `${el.scrollHeight}px`
+  },
+  Leave(el){
+    el.style.height = '0px'
+  },
+  afterLeave(el){
+    el.style.height = ''
+  }
+}
 </script>
 <template>
   <div class="yd-collapse-item"
   :class="{
     'is-disabled':disabled
   }">
-    <div class="yd-collapse__header" :id="`item-header-${name}`"   @click="handleClick">
+    <div class="yd-collapse-item__header"
+    :id="`item-header-${name}`"
+    @click="handleClick"
+    :class="{
+      'is-disabled':disabled,
+      'is-active':isActive
+    }">
       <slot name="title" >{{ title }}</slot>
     </div>
-    <div class="yd-collapse__content" :id="`item-content-${name}`" v-show="isActive">
-      <slot></slot>
-    </div>
+    <Transition name="slide" v-on="transitionEvents">
+      <div class="yd-collapse-item__content" :id="`item-content-${name}`" v-show="isActive">
+        <slot></slot>
+      </div>
+    </Transition>
   </div>
 </template>
 <style>
-.yd-collapse__header{
-  font-size: 30px;
-}
 </style>

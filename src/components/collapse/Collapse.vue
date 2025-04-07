@@ -1,10 +1,10 @@
-
 <template>
   <div class="yd-collapse">
     <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>
+import './style.css'
 import type { NameType,CollapseProps,CollapseEmits } from './types';
 import { collapseContextKey } from './types'
 import { ref,provide, warn,watch } from 'vue'
