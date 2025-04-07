@@ -12,4 +12,14 @@ export interface CollapseContext {
   handleItemClick: (name:NameType) => void
 }
 
+export interface CollapseProps {
+  modelValue: NameType[];
+  according?: boolean;
+}
+
+export interface CollapseEmits{
+  (e: 'update:modelValue',values: NameType[]): void;
+  (e: 'change',values: NameType[]): void;
+}
+
 export const collapseContextKey: InjectionKey<CollapseContext> = Symbol('collapseContextKey')
