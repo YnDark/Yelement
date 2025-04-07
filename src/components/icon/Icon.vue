@@ -1,7 +1,7 @@
 <template>
-  <i class="yd-icon">
-    <font-awesome-icon v-bind="filteredProps" :class="{ [`yd-icon--${type}`]: type }"
-      :style="customStyles"></font-awesome-icon>
+  <i class="yd-icon" v-bind="$attrs" :class="{ [`yd-icon--${type}`]: type }"
+  :style="customStyles">
+    <font-awesome-icon v-bind="filteredProps" ></font-awesome-icon>
   </i>
 </template>
 <script lang="ts" setup>

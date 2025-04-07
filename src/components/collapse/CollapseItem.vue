@@ -3,6 +3,7 @@ import type { CollapseItemProps } from './types';
 import { inject,computed } from 'vue';
 import { collapseContextKey } from './types';
 import './style.css'
+import Icon from '../icon/Icon.vue'
 defineOptions({
   name:'yd-collapse-item'
 })
@@ -51,6 +52,7 @@ const transitionEvents:Record<string,(el: HTMLElement)=>void> = {
       'is-active':isActive
     }">
       <slot name="title" >{{ title }}</slot>
+      <Icon icon="angle-right" class="header-angle"></Icon>
     </div>
     <Transition name="slide" v-on="transitionEvents">
       <div class="yd-collapse-item__wrapper" v-show="isActive">

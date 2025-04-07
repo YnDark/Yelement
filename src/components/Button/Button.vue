@@ -7,7 +7,10 @@
     'is-round': round,
     'is-circle': circle,
     'is-disabled': disabled,
-  }" :disabled="disabled" :autofocus="autofocus" :type="nativeType" ref="_ref">
+    'is-loading': loading
+  }" :disabled="disabled || loading" :autofocus="autofocus" :type="nativeType" ref="_ref">
+    <Icon icon="spinner" spin v-if="loading"></Icon>
+    <Icon :icon="icon" v-if="icon"></Icon>
     <span>
       <slot></slot>
     </span>
@@ -16,6 +19,7 @@
 <script lang="ts">
 import { defineComponent, withDefaults, ref } from 'vue';
 import './style.css'
+import Icon from '../Icon/Icon.vue'
 export default defineComponent({
   name: "YButton",
 })
