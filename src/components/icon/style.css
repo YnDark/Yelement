@@ -1,0 +1,15 @@
+.yd-icon{
+  --yd-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--yd-icon-color);
+  font-size: inherit;
+}
+@each $val in 'primary','success','warning','danger','info' {
+  .yd-icon--$(val) {
+    --yd-icon-color: var(--yd-color-$(val));
+  }
+}

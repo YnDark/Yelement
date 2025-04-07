@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import Button from './components/Button/Button.vue'
 import type { ButtonInstance } from './components/Button/types.ts';
 import Collapse from './components/collapse/collapse.vue';
+import Icon from './components/icon/icon.vue';
 import CollapseItem from './components/collapse/CollapseItem.vue';
 const buttoni = ref<ButtonInstance | null>(null)
 const openValue = ref([])
@@ -15,6 +16,7 @@ onMounted(() => {
 
 <template>
   <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <Icon icon="arrow-up" size="xl" type="danger" spin color="blue"/>
   <div>
     <Button type='warning' plain ref="buttoni">test button</Button>
     <Button type="primary" plain >test button</Button>
