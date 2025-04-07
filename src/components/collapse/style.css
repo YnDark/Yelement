@@ -49,9 +49,9 @@
   font-size: var(--yd-collapse-content-font-size);
   color: var(--yd-collapse-content-text-color);
   border-bottom: 1px solid var(--yd-collapse-border-color);
-  /* padding-bottom: 25px; */
+  padding-bottom: 25px;
 }
 .slide-enter-active, .slide-leave-active {
-  transition: height 0.5s ease-in-out;
+  transition: height 1s ease-in-out;
 }
 

@@ -5,7 +5,7 @@ import type { ButtonInstance } from './components/Button/types.ts';
 import Collapse from './components/collapse/collapse.vue';
 import CollapseItem from './components/collapse/CollapseItem.vue';
 const buttoni = ref<ButtonInstance | null>(null)
-const openValue = ref(['a'])
+const openValue = ref([])
 onMounted(() => {
   if (buttoni.value) {
     console.log(buttoni.value.ref)
@@ -40,10 +40,11 @@ onMounted(() => {
           内容1
         </div>
       </CollapseItem>
-      <CollapseItem name="b" disabled>
+      <CollapseItem name="b">
         <template #title>
           <h1>title2</h1>
         </template>
+        <h1>title2</h1>
         <div>
           内容2
         </div>
