@@ -1,42 +1,88 @@
 <script setup lang='ts'>
-import { reactive, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue';
 import { createPopper, type Instance } from '@popperjs/core'
-import type { TooltipProps, TooltipEmits } from './types';
+import type { TooltipProps, TooltipEmits, ToolTipInstance } from './types';
+import useClickOutside from '@/hooks/useClickOutSide';
+import { debounce } from 'lodash-es'
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'bottom',
-  trigger: 'hover'
+  trigger: 'hover',
+  openDelay: 0,
+  closeDelay: 0,
+  transition: 'fade',
 })
-let events: Record<string,any> = reactive({})
-let outterEvents: Record<string,any> = reactive({})
-const attachEvents = () => {
-  if(props.trigger === 'hover'){
-    outterEvents['mouseenter'] = open
-    outterEvents['mouseleave'] = close
+let events: Record<string, any> = reactive({})
+let outterEvents: Record<string, any> = reactive({})
+const popperOptions = computed(() => {
+  return {
+    placement: props.placement,
+    ...props.popperOptions
   }
-  else if(props.trigger === 'click'){
+})
+const attachEvents = () => {
+  if (props.trigger === 'hover') {
+    outterEvents['mouseenter'] = openOnceDebouce
+    outterEvents['mouseleave'] = closeOnceDebouce
+  }
+  else if (props.trigger === 'click') {
     outterEvents['click'] = togglePopper
   }
 }
+
 const emits = defineEmits<TooltipEmits>()
 const isOpen = ref(false)
-const togglePopper = () => {
-  isOpen.value = !isOpen.value
-  emits('visible-change', isOpen.value)
-}
-const open = ()=>{
+const open = () => {
+  console.log(props.openDelay)
   isOpen.value = true
   emits('visible-change', true)
 }
-const close = ()=>{
+const close = () => {
+  console.log(props.closeDelay)
   isOpen.value = false
   emits('visible-change', false)
+
+}
+const togglePopper = () => {
+  if(isOpen.value === true){
+    closeOnceDebouce()
+  }
+  else{
+    openOnceDebouce()
+  }
+}
+const openDebouce = debounce(open,props.openDelay)
+const closeDebouce = debounce(close,props.closeDelay)
+const openOnceDebouce = ()=>{
+  openDebouce.cancel()
+  openDebouce()
+}
+const closeOnceDebouce = ()=>{
+  closeDebouce.cancel()
+  closeDebouce()
 }
 const triggerNode = ref<HTMLElement>()
 const popperNode = ref<HTMLElement>()
+const popperContainerNode = ref<HTMLElement>()
 let popperInstance: null | Instance = null
-attachEvents()
-watch(()=>props.trigger,(newTrigger,oldTrigger)=>{
-  if(newTrigger !== oldTrigger){
+if (!props.manual) {
+  attachEvents()
+}
+watch(() => props.manual, () => {
+  if (props.manual) {
+    events = {}
+    outterEvents = {}
+  }
+  else {
+    attachEvents()
+  }
+})
+useClickOutside(popperContainerNode, () => {
+  if (props.trigger === 'click' && isOpen.value && !props.manual) {
+    close()
+  }
+})
+watch(() => props.trigger, (newTrigger, oldTrigger) => {
+  if (newTrigger !== oldTrigger) {
     events = {}
     outterEvents = {}
     attachEvents()
@@ -45,24 +91,33 @@ watch(()=>props.trigger,(newTrigger,oldTrigger)=>{
 watch(isOpen, (newValue) => {
   if (newValue) {
     if (popperNode.value && triggerNode.value) {
-      popperInstance = createPopper(triggerNode.value, popperNode.value, {
-        placement: props.placement
-      })
+      popperInstance = createPopper(triggerNode.value, popperNode.value, popperOptions.value)
     } else {
       popperInstance?.destroy()
     }
   }
 }, { flush: 'post' })
+onBeforeUnmount(() => {
+  popperInstance?.destroy()
+})
+defineExpose<ToolTipInstance>({
+  'show': openOnceDebouce,
+  'hide': closeOnceDebouce
+})
 </script>
 <template>
-  <div class="yd-tooltip" v-on="outterEvents">
+
+  <div class="yd-tooltip" v-on="outterEvents" ref="popperContainerNode">
     <div class="yd-tooltip__trigger" ref="triggerNode" v-on="events">
       <slot></slot>
     </div>
-    <div class="yd-tooltip__popper" ref="popperNode" v-if="isOpen">
-      <slot name = 'content'>
-        {{ content }}
-      </slot>
-    </div>
+    <transition :name="transition">
+      <div class="yd-tooltip__popper" ref="popperNode" v-if="isOpen">
+        <slot name='content'>
+          {{ content }}
+        </slot>
+      </div>
+    </transition>
   </div>
+
 </template>

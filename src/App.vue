@@ -9,20 +9,26 @@ import Alert from './components/Alert/Alert.vue';
 import type { AlertInstance } from './components/Alert/types';
 import { createPopper } from '@popperjs/core';
 import ToolTip from './components/Tooltip/Tooltip.vue'
+import type { Options } from '@popperjs/core'
+import type { ToolTipInstance } from './components/Tooltip/types';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
+const tooltipRef = ref<ToolTipInstance | null>(null)
 const overlayNode = ref<HTMLElement>()
 const triggerNode = ref<HTMLAnchorElement>()
+const options: Partial<Options> = {
+  strategy: 'absolute'
+}
 onMounted(() => {
   if (buttoni.value) {
     console.log(buttoni.value.ref)
   }
-  if(alertInstance.value){
+  if (alertInstance.value) {
     console.log(alertInstance.value.close)
   }
-  if(overlayNode.value && triggerNode.value){
-    createPopper(triggerNode.value,overlayNode.value,{placement:'right'})
+  if (overlayNode.value && triggerNode.value) {
+    createPopper(triggerNode.value, overlayNode.value, { placement: 'right' })
   }
 })
 </script>
@@ -30,9 +36,19 @@ onMounted(() => {
 <template>
   <div>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    <div ref="triggerNode"><h1>Hello Vue</h1></div>
+    <div ref="triggerNode">
+      <h1>Hello Vue</h1>
+    </div>
   </div>
   <Icon icon="arrow-up" size="xl" type="danger" spin color="blue" />
+  <div>
+    <Button ref="buttoni">test button</Button>
+    <Button loading>test button</Button>
+    <Button round>test button</Button>
+    <Button>test button</Button>
+    <Button size="large">test button</Button>
+    <Button size="small" disabled>test button</Button>
+  </div>
   <div>
     <Button icon="arrow-up" type='warning' plain ref="buttoni">test button</Button>
     <Button loading type="primary" plain>test button</Button>
@@ -110,13 +126,15 @@ onMounted(() => {
       </div>
     </Alert>
     <Alert title="标题" type="success" align="center">
-      <template #header>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</template>
+      <template
+        #header>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</template>
       <div>
         11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
       </div>
     </Alert>
   </div>
-  <ToolTip content="Hello Vue" trigger="hover">
+  <ToolTip transition="fade" :open-delay="1000" :close-delay="1000" content="Hello Vue" trigger="click" :popper-options="options"
+    ref="tooltipRef">
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     <template #content>
       <h1>Hello ToolTip</h1>
