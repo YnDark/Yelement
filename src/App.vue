@@ -133,11 +133,11 @@ onMounted(() => {
       </div>
     </Alert>
   </div>
-  <ToolTip transition="fade" :open-delay="1000" :close-delay="1000" content="Hello Vue" trigger="click" :popper-options="options"
+  <ToolTip placement="right" transition="fade" :open-delay="1000" :close-delay="1000" content="Hello Vue" trigger="click" :popper-options="options"
     ref="tooltipRef">
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
     <template #content>
-      <h1>Hello ToolTip</h1>
+      <div>Hello ToolTip</div>
     </template>
   </ToolTip>
 </template>
