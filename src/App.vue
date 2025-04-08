@@ -7,9 +7,13 @@ import Icon from './components/Icon/Icon.vue';
 import CollapseItem from './components/Collapse/CollapseItem.vue';
 import Alert from './components/Alert/Alert.vue';
 import type { AlertInstance } from './components/Alert/types';
+import { createPopper } from '@popperjs/core';
+import ToolTip from './components/Tooltip/Tooltip.vue'
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
+const overlayNode = ref<HTMLElement>()
+const triggerNode = ref<HTMLAnchorElement>()
 onMounted(() => {
   if (buttoni.value) {
     console.log(buttoni.value.ref)
@@ -17,11 +21,17 @@ onMounted(() => {
   if(alertInstance.value){
     console.log(alertInstance.value.close)
   }
+  if(overlayNode.value && triggerNode.value){
+    createPopper(triggerNode.value,overlayNode.value,{placement:'right'})
+  }
 })
 </script>
 
 <template>
-  <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <div ref="triggerNode"><h1>Hello Vue</h1></div>
+  </div>
   <Icon icon="arrow-up" size="xl" type="danger" spin color="blue" />
   <div>
     <Button icon="arrow-up" type='warning' plain ref="buttoni">test button</Button>
@@ -69,7 +79,7 @@ onMounted(() => {
     </Collapse>
   </div>
   <div>
-    <Alert title="标题" type="primary" align="center" closable ref="alertInstance">
+    <Alert icon="xmark" title="标题" type="primary" align="center" closable ref="alertInstance">
       <template #header>标题1</template>
       <div>
         <h1>描述</h1>
@@ -106,6 +116,12 @@ onMounted(() => {
       </div>
     </Alert>
   </div>
+  <ToolTip content="Hello Vue" trigger="hover">
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <template #content>
+      <h1>Hello ToolTip</h1>
+    </template>
+  </ToolTip>
 </template>
 
 <style scoped>
