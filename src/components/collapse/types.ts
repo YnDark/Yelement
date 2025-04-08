@@ -19,7 +19,6 @@ export interface CollapseProps {
 
 export interface CollapseEmits{
   (e: 'update:modelValue',values: NameType[]): void;
-  (e: 'change',values: NameType[]): void;
 }
 
 export const collapseContextKey: InjectionKey<CollapseContext> = Symbol('collapseContextKey')

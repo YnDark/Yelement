@@ -17,9 +17,8 @@
 }
 .yd-alert {
   display: flex;
-  line-height: 1;
+  line-height: 1.2;
   justify-content: left;
-  height: 50px;
   white-space: nowrap;
   color: var(--yd-alert-text-color);
   box-sizing: border-box;
@@ -46,12 +45,21 @@
 .yd-alert__container{
   flex: 1;
 }
+.yd-alert__header,
+.yd-alert__content {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
 .yd-alert__header{
-  font-size: 16px;
+  font-size: var(--yd-font-size-medium);
 }
 .yd-alert__icon{
   cursor: pointer;
   margin-left: auto;
+}
+.yd-alert__content{
+  margin-top: 10px;
 }
 @each $val in center,left,right {
   .yd-alert--$(val) {
