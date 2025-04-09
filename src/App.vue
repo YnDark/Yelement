@@ -44,11 +44,11 @@ onMounted(() => {
   if (tooltipRef.value) {
     console.log(tooltipRef)
   }
-  const instance = createMessage({message:'动态创建',duration:0})
-  createMessage({message:'动态创建',duration:0})
-  createMessage({message:'动态创建',duration:0})
-  createMessage({message:'动态创建',duration:0})
-  createMessage({message:'动态创建',duration:0})
+  const instance = createMessage({message:'success',duration:0,type:'success'})
+  createMessage({message:'danger',duration:3000,type:'danger'})
+  createMessage({message:'info',duration:0,type:'info'})
+  createMessage({message:'warning',duration:0,type:'warning'})
+  createMessage({message:'success',duration:0,type:'success'})
   setTimeout(() => {
     instance.destroy()
   }, 1000);

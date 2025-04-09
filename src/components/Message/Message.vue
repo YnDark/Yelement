@@ -3,9 +3,10 @@ import type { MessageProps } from './types';
 import RenderVnode from '../Common/RenderVnode';
 import Icon from '../Icon/Icon.vue';
 import { computed, onMounted, type Ref, ref } from 'vue';
-import { watch } from 'vue';
+
 import { getLastInstance,getLastBottomOffset } from './method';
 import { nextTick } from 'vue';
+import useEventLisener from '@/hooks/useEventLinsener';
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',
   duration: 3000,
@@ -32,51 +33,64 @@ const cssStyle = computed(()=>{
     "z-index":props.zIndex
   }
 })
+let timer:any;
 function startTimer() {
   if (props.duration === 0) {
     return
   }
-  setTimeout(() => {
+  timer = setTimeout(() => {
     visible.value = false
   }, props.duration);
+}
+function clearTimer(){
+  clearTimeout(timer)
 }
 onMounted(async () => {
   visible.value = true
   startTimer()
   await nextTick()
-  height.value = messageRef.value!.getBoundingClientRect().height
+
 })
-watch(visible, (newValue) => {
-  if (!newValue) {
-    props.onDestroy()
+function keydown(e:Event){
+  const event = e as KeyboardEvent
+  if(event.code === 'Escape'){
+    visible.value = false
   }
-})
+}
+useEventLisener(document,'keydown',keydown)
+// watch(visible, (newValue) => {
+//   if (!newValue) {
+//     destroyComponent()
+//   }
+// })
+function destroyComponent(){
+  props.onDestroy()
+}
+function updateHeight(){
+  height.value = messageRef.value!.getBoundingClientRect().height
+}
 defineExpose({bottomOffset,visible})
 </script>
 <template>
-  <div class="yd-message" v-show="visible" :class="{
-    [`yd-message--${type}`]: type,
-    'is-close': showClose
-  }"
-  :style="cssStyle"
-  ref="messageRef">
-    <div class="yd-message__content">
-      <slot>
-        <RenderVnode :vNode="message" v-if="message"></RenderVnode>
-      </slot>
+  <Transition name="fade"
+  @afterLeave="destroyComponent"
+  @enter="updateHeight">
+    <div class="yd-message" v-show="visible" :class="{
+      [`yd-message--${type}`]: type,
+      'is-close': showClose
+    }"
+    @mouseenter="clearTimer"
+    @mouseleave="startTimer"
+    :style="cssStyle"
+    ref="messageRef">
+      <div class="yd-message__content">
+        <slot>
+          <RenderVnode :vNode="message" v-if="message"></RenderVnode>
+        </slot>
+      </div>
+      <div class="yd-message__close">
+        <Icon icon='xmark' @click.stop="visible = false" />
+      </div>
     </div>
-    <div class="yd-message__close">
-      <Icon icon='xmark' @click.stop="visible = false" />
-    </div>
-  </div>
+  </Transition>
 </template>
-<style scoped>
-.yd-message {
-  width: max-content;
-  position: fixed;
-  left: 50%;
-  top: 20px;
-  transform: translateX(-50%);
-  border: 1px solid blue;
-}
-</style>
