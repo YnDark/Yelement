@@ -28,7 +28,8 @@ const bottomOffset = computed(()=>{
 })
 const cssStyle = computed(()=>{
   return {
-    top: topOffset.value + 'px'
+    top: topOffset.value + 'px',
+    "z-index":props.zIndex
   }
 })
 function startTimer() {
@@ -50,7 +51,7 @@ watch(visible, (newValue) => {
     props.onDestroy()
   }
 })
-defineExpose({bottomOffset})
+defineExpose({bottomOffset,visible})
 </script>
 <template>
   <div class="yd-message" v-show="visible" :class="{
