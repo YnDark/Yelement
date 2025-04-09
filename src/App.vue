@@ -11,6 +11,9 @@ import { createPopper } from '@popperjs/core';
 import ToolTip from './components/Tooltip/Tooltip.vue'
 import type { Options } from '@popperjs/core'
 import type { ToolTipInstance } from './components/Tooltip/types';
+import Dropdown from './components/Dropdown/Dropdown.vue';
+import type { MenuOption } from './components/Dropdown/types';
+import {h} from 'vue'
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -20,6 +23,12 @@ const triggerNode = ref<HTMLAnchorElement>()
 const options: Partial<Options> = {
   strategy: 'absolute'
 }
+const dropdownOptions: MenuOption[] = [
+  {key:1,label:h('b','this is bold')},
+  {key:2,label:'item2',disabled:true},
+  {key:3,label:'item3',divided:true},
+  {key:4,label:'item4'}
+]
 onMounted(() => {
   if (buttoni.value) {
     console.log(buttoni.value.ref)
@@ -29,6 +38,10 @@ onMounted(() => {
   }
   if (overlayNode.value && triggerNode.value) {
     createPopper(triggerNode.value, overlayNode.value, { placement: 'right' })
+  }
+  console.log(tooltipRef)
+  if (tooltipRef.value) {
+    console.log(tooltipRef)
   }
 })
 </script>
@@ -133,13 +146,20 @@ onMounted(() => {
       </div>
     </Alert>
   </div>
-  <ToolTip placement="right" transition="fade" :open-delay="1000" :close-delay="1000" content="Hello Vue" trigger="click" :popper-options="options"
-    ref="tooltipRef">
-    <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    <template #content>
-      <div>Hello ToolTip</div>
-    </template>
-  </ToolTip>
+  <div>
+    <ToolTip placement="right" transition="fade" :open-delay="1000" :close-delay="1000" content="Hello Vue" trigger="hover" :popper-options="options"
+      ref="tooltipRef">
+      <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
+      <template #content>
+        <div>Hello ToolTip</div>
+      </template>
+    </ToolTip>
+  </div>
+  <div>
+    <Dropdown placement="right" transition="fade" :menu-options="dropdownOptions">
+      <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    </Dropdown>
+  </div>
 </template>
 
 <style scoped>
