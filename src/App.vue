@@ -14,6 +14,7 @@ import type { ToolTipInstance } from './components/Tooltip/types';
 import Dropdown from './components/Dropdown/Dropdown.vue';
 import type { MenuOption } from './components/Dropdown/types';
 import {h} from 'vue'
+import { createMessage } from './components/Message/method';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -43,6 +44,11 @@ onMounted(() => {
   if (tooltipRef.value) {
     console.log(tooltipRef)
   }
+  createMessage({message:'动态创建',duration:0})
+  createMessage({message:'动态创建',duration:0})
+  createMessage({message:'动态创建',duration:0})
+  createMessage({message:'动态创建',duration:0})
+  createMessage({message:'动态创建',duration:0})
 })
 </script>
 
@@ -147,7 +153,7 @@ onMounted(() => {
     </Alert>
   </div>
   <div>
-    <ToolTip placement="right" transition="fade" :open-delay="1000" :close-delay="1000" content="Hello Vue" trigger="hover" :popper-options="options"
+    <ToolTip placement="right" transition="fade" :open-delay="200" :close-delay="200" content="Hello Vue" trigger="hover" :popper-options="options"
       ref="tooltipRef">
       <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
       <template #content>
@@ -156,7 +162,7 @@ onMounted(() => {
     </ToolTip>
   </div>
   <div>
-    <Dropdown placement="right" transition="fade" :menu-options="dropdownOptions">
+    <Dropdown transition="fade" :menu-options="dropdownOptions">
       <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Dropdown>
   </div>

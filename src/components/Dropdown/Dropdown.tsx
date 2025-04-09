@@ -5,7 +5,7 @@ import type { MenuOption } from './types'
 import Tooltip from '../Tooltip/Tooltip.vue'
 import type { ToolTipInstance } from '../Tooltip/types'
 export default defineComponent({
-  name: 'VkDropdown',
+  name: 'ydDropdown',
   props: {
     placement: {
       type: String as PropType<Placement>,
@@ -63,7 +63,7 @@ export default defineComponent({
           <Fragment key={item.key}>
             { item.divided ? <li role="separator" class="divided-placeholder"/> : '' }
             <li
-              class={{'vk-dropdown__item': true, 'is-disabled': item.disabled, 'is-divided': item.divided }}
+              class={{'yd-dropdown__item': true, 'is-disabled': item.disabled, 'is-divided': item.divided }}
               id={`dropdown-item-${item.key}`}
               onClick={() => itemClick(item)}
             >

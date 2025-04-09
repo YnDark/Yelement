@@ -1,16 +1,17 @@
 <template>
   <i class="yd-icon" v-bind="$attrs" :class="{ [`yd-icon--${type}`]: type }"
   :style="customStyles">
-    <font-awesome-icon v-bind="filteredProps" ></font-awesome-icon>
+    <FontAwesomeIcon v-bind="filteredProps" ></FontAwesomeIcon>
   </i>
 </template>
 <script lang="ts" setup>
 import type { Iconprops } from './types'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { omit } from 'lodash-es';
 import './style.css'
 import { computed } from 'vue';
 defineOptions({
-  name: "ydIcon",
+  name: "Icon",
   inheritAttrs: false
 })
 const props = defineProps<Iconprops>()
