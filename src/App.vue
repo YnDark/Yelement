@@ -203,6 +203,7 @@ const customRender = (option:SelectOption) => {
   <div>
     <Select clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
     <Select :render-lable="customRender" clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
+    <Select :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
   </div>
 </template>
 
