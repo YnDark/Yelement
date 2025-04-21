@@ -16,6 +16,7 @@ import type { MenuOption } from './components/Dropdown/types';
 import {h} from 'vue'
 import { createMessage } from './components/Message/method';
 import Input from './components/Input/Input.vue';
+import Switch from './components/Switch/Switch.vue';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -54,7 +55,7 @@ onMounted(() => {
     instance.destroy()
   }, 1000);
 })
-const innerValue = ref('123')
+const innerValue = ref('right')
 </script>
 
 <template>
@@ -182,6 +183,9 @@ const innerValue = ref('123')
     </Input>
     <Input :showPassword="true" :modelValue="innerValue" type="textarea" :clearable="true">
     </Input>
+  </div>
+  <div>
+    <Switch inactive-text="左" active-text="右" v-model="innerValue" active-value="right" inactive-value="wrong"></Switch>
   </div>
 </template>
 
