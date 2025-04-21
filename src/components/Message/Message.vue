@@ -49,7 +49,6 @@ onMounted(async () => {
   visible.value = true
   startTimer()
   await nextTick()
-
 })
 function keydown(e:Event){
   const event = e as KeyboardEvent
@@ -58,11 +57,6 @@ function keydown(e:Event){
   }
 }
 useEventLisener(document,'keydown',keydown)
-// watch(visible, (newValue) => {
-//   if (!newValue) {
-//     destroyComponent()
-//   }
-// })
 function destroyComponent(){
   props.onDestroy()
 }

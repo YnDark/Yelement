@@ -15,6 +15,7 @@ import Dropdown from './components/Dropdown/Dropdown.vue';
 import type { MenuOption } from './components/Dropdown/types';
 import {h} from 'vue'
 import { createMessage } from './components/Message/method';
+import Input from './components/Input/Input.vue';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -44,15 +45,16 @@ onMounted(() => {
   if (tooltipRef.value) {
     console.log(tooltipRef)
   }
-  const instance = createMessage({message:'success',duration:0,type:'success'})
-  createMessage({message:'danger',duration:3000,type:'danger'})
-  createMessage({message:'info',duration:0,type:'info'})
-  createMessage({message:'warning',duration:0,type:'warning'})
-  createMessage({message:'success',duration:0,type:'success'})
+  const instance = createMessage({message:'success',duration:0,type:'success',offset:10})
+  createMessage({message:'danger',duration:3000,type:'danger',offset:10})
+  createMessage({message:'info',duration:0,type:'info',offset:10})
+  createMessage({message:'warning',duration:0,type:'warning',offset:10})
+  createMessage({message:'success',duration:0,type:'success',offset:10})
   setTimeout(() => {
     instance.destroy()
   }, 1000);
 })
+const innerValue = ref('123')
 </script>
 
 <template>
@@ -168,6 +170,24 @@ onMounted(() => {
     <Dropdown transition="fade" :menu-options="dropdownOptions">
       <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
     </Dropdown>
+  </div>
+  <div>
+    <Input :showPassword="true" :modelValue="innerValue" type="text" :clearable="true">
+      <template #prefix>
+        prefix
+      </template>
+      <template #prepend>
+        prepend
+      </template>
+      <template #append>
+        append
+      </template>
+      <template #suffix>
+        suffix
+      </template>
+    </Input>
+    <Input :showPassword="true" :modelValue="innerValue" type="textarea" :clearable="true">
+    </Input>
   </div>
 </template>
 

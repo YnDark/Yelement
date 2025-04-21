@@ -5,4 +5,5 @@
 @import '../components/Button/style.css';
 @import '../components/Alert/style.css';
 @import '../components/Tooltip/style.css';
-@import '../components/Message/style.css'
+@import '../components/Message/style.css';
+@import '../components/Input/style.css';
