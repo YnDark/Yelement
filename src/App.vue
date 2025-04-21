@@ -17,6 +17,7 @@ import {h} from 'vue'
 import { createMessage } from './components/Message/method';
 import Input from './components/Input/Input.vue';
 import Switch from './components/Switch/Switch.vue';
+import Select from './components/Select/Select.vue';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -56,6 +57,18 @@ onMounted(() => {
   }, 1000);
 })
 const innerValue = ref('right')
+import type { SelectOption } from './components/Select/types';
+const test = ref('1')
+const options2:SelectOption[] = [
+  {label: 'hello', value: "1"},
+  {label: 'hello2', value: "2"},
+  {label: 'hello3', value: "3"},
+  {label: 'hello4', value: "4"},
+  {label: 'hello5', value: "5", disabled:true}
+]
+const customRender = (option:SelectOption) => {
+  return h('div',{className:'xyz'},[h('b',option.label),h('span',option.value)])
+}
 </script>
 
 <template>
@@ -186,6 +199,10 @@ const innerValue = ref('right')
   </div>
   <div>
     <Switch inactive-text="左" active-text="右" v-model="innerValue" active-value="right" inactive-value="wrong"></Switch>
+  </div>
+  <div>
+    <Select clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
+    <Select :render-lable="customRender" clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
   </div>
 </template>
 

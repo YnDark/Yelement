@@ -17,7 +17,7 @@ const popperOptions = computed(() => {
   return {
     placement: props.placement,
     modifiers: [
-      { 
+      {
         name: 'offset',
         options: {
           offset: [0, 9]
@@ -87,6 +87,9 @@ watch(() => props.manual, () => {
 useClickOutside(popperContainerNode, () => {
   if (props.trigger === 'click' && isOpen.value && !props.manual) {
     close()
+  }
+  if(isOpen.value === true){
+    emits('click-outside',true)
   }
 })
 watch(() => props.trigger, (newTrigger, oldTrigger) => {
