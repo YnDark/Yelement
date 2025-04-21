@@ -30,6 +30,13 @@
   .yd-input__inner {
     cursor: pointer;
   }
+  .yd-select__nodata, .yd-select__loading {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    color: var(--yd-text-color-secondary);
+    font-size: var(--yd-select-font-size);
+  }
   .yd-select__menu {
     list-style: none;
     margin: 6px 0;

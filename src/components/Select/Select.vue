@@ -7,11 +7,11 @@ import type { ToolTipInstance } from '../Tooltip/types';
 import type { InputInstance } from '../Input/types';
 import Icon from '../Icon/Icon.vue';
 import RenderVnode from '../Common/RenderVnode';
-import { isFunction } from 'lodash-es';
+import { isFunction,debounce } from 'lodash-es';
 defineOptions({
   name: 'YdSelect'
 })
-const props = withDefaults(defineProps<SelectProps>(),{
+const props = withDefaults(defineProps<SelectProps>(), {
   options: () => []
 })
 const emits = defineEmits<SelectEmits>()
@@ -27,7 +27,7 @@ const states = reactive<SelectStates>({
   inputValue: initOption ? initOption.label : '',
   selectedOption: initOption,
   mouseHover: false,
-  loading:false
+  loading: false
 })
 const filteredPlaceholder = computed(() => {
   return (props.filterable && states.selectedOption && isDropDownShow.value) ? states.selectedOption.label : props.placeholder
@@ -95,19 +95,19 @@ const filteredOptions = ref(props.options)
 watch(() => props.options, (newOptions) => {
   filteredOptions.value = newOptions
 })
-const generateFilterOptions = async(searchValue: string) => {
+const generateFilterOptions = async (searchValue: string) => {
   if (!props.filterable) return
   if (props.filterMethod && isFunction(props.filterMethod)) {
     filteredOptions.value = props.filterMethod(searchValue)
   }
-  else if(props.remote && props.remoteMethod && isFunction(props.remoteMethod)){
+  else if (props.remote && props.remoteMethod && isFunction(props.remoteMethod)) {
     states.loading = true
-    try{
+    try {
       filteredOptions.value = await props.remoteMethod(searchValue)
-    }catch(e){
+    } catch (e) {
       console.log(e)
       filteredOptions.value = []
-    }finally{
+    } finally {
       states.loading = false
     }
   }
@@ -126,14 +126,20 @@ const clear = () => {
   emits('update:modelValue', '')
 }
 const NOOP = () => { }
+const timeOut = computed(()=>{
+  return props.remote ? 300 : 0
+})
+const debounceOnFilter = debounce(()=>{
+  onFilter()
+},timeOut.value)
 </script>
 <template>
   <div @mouseenter="states.mouseHover = true" @mouseleave="states.mouseHover = false" class="yd-select"
     :class="{ 'is-disabled': disabled }" @click="toggleDropdown">
     <Tooltip @click-outside="controlDropdwon(false)" :popper-options="popperOptions" ref="toolTipRef"
       placement="bottom-start" :manual="true">
-      <Input @input="onFilter" ref="inputInstance" :readonly="!filterable || !isDropDownShow" v-model="states.inputValue"
-        :disabled="disabled" :placeholder="filteredPlaceholder">
+      <Input @input="debounceOnFilter" ref="inputInstance" :readonly="!filterable || !isDropDownShow"
+        v-model="states.inputValue" :disabled="disabled" :placeholder="filteredPlaceholder">
       <template #suffix>
         <Icon @click.stop="clear" @mousedown.prevent="NOOP" icon="circle-xmark" v-if="showClearIcon"
           class="yd-input__clear"></Icon>
@@ -143,7 +149,11 @@ const NOOP = () => { }
       </template>
       </Input>
       <template #content>
-        <ul class="yd-select__menu">
+        <div class="yd-select__loading" v-if="states.loading">
+          <Icon icon="spinner" spin></Icon>
+        </div>
+        <div class="yd-select__nodata" v-else-if="filterable && filteredOptions.length === 0">no matching data</div>
+        <ul class="yd-select__menu" v-else>
           <template v-for="(item, index) in filteredOptions" :key="index">
             <li @click.stop='itemSelect(item)' class="yd-select__menu-item"
               :class="{ 'is-disabled': item.disabled, 'is-selected': states.selectedOption?.value === item.value }"

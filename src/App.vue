@@ -69,6 +69,12 @@ const options2:SelectOption[] = [
 const customRender = (option:SelectOption) => {
   return h('div',{className:'xyz'},[h('b',option.label),h('span',option.value)])
 }
+const handleFetch = (query:any)=>{
+  if(!query) return Promise.resolve([])
+  return fetch(`https://api.github.com/search/repositories?q=${query}`).then((res)=>res.json()).then(({items})=>{
+    return items.slice(0, 10).map((item:any) => ({label:item.name,value:item.node_id}))
+  })
+}
 </script>
 
 <template>
@@ -204,6 +210,7 @@ const customRender = (option:SelectOption) => {
     <Select clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
     <Select :render-lable="customRender" clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
     <Select :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
+    <Select :remote="true" :remote-method="handleFetch" :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" placeholder="测试" :model-value="test"></Select>
   </div>
 </template>
 
