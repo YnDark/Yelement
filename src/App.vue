@@ -173,17 +173,11 @@ const innerValue = ref('123')
   </div>
   <div>
     <Input :showPassword="true" :modelValue="innerValue" type="text" :clearable="true">
-      <template #prefix>
-        prefix
-      </template>
       <template #prepend>
         prepend
       </template>
       <template #append>
         append
-      </template>
-      <template #suffix>
-        suffix
       </template>
     </Input>
     <Input :showPassword="true" :modelValue="innerValue" type="textarea" :clearable="true">
