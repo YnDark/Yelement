@@ -1,19 +1,35 @@
 <script setup lang='ts'>
-import type { FormProps } from './types';
+import type { FormContext,FormItemContext, FormProps } from './types';
 import { provide } from 'vue';
 import { formContextKey } from './types';
 defineOptions({
   name:'YdForm'
 })
 const props = defineProps<FormProps>()
-console.log(props)
-provide(formContextKey,props)
+const fields:FormItemContext[] = []
+const addFiled: FormContext['addFiled'] = (field)=>{
+  fields.push(field)
+}
+const removeFiled: FormContext['removeFiled'] = (field)=>{
+    if(field.prop){
+      fields.splice(fields.indexOf(field),1)
+    }
+}
+provide(formContextKey,{
+  ...props,
+  addFiled,
+  removeFiled
+})
+const validate = ()=>{
+  console.log(fields)
+}
 </script>
 <template>
-  <div class="yd-Form">
+  <form class="yd-Form">
     <slot>
     </slot>
-  </div>
+    <button @click.prevent="validate">validate</button>
+  </form>
 </template>
 <style scoped>
 </style>

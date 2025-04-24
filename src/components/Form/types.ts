@@ -13,7 +13,8 @@ export interface FrmItemRule extends RuleItem{
 }
 export type FormRules = Record<string,RuleItem[]>
 export interface FormContext extends FormProps{
-
+  addFiled: (field: FormItemContext) => void,
+  removeFiled: (field: FormItemContext) => void,
 }
 export interface FormValidateFailure{
   errors: ValidateError[] | null,
@@ -24,4 +25,6 @@ export const itemContextKey:InjectionKey<FormItemContext> = Symbol('itemContextK
 
 export interface FormItemContext{
   validate:(trigger?:string) => any,
+  prop: string
 }
+

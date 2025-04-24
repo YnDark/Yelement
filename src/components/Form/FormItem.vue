@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import type { FromItemProps } from './types';
-import { computed, inject, provide, reactive } from 'vue';
+import { computed, inject, onMounted, onUnmounted, provide, reactive } from 'vue';
 import { formContextKey, itemContextKey } from './types';
 import {isNil} from 'lodash-es'
 import Schema from 'async-validator';
@@ -9,6 +9,8 @@ import type { FormItemContext } from './types'
 defineOptions({
   name:'yd-form-item'
 })
+
+
 const props = defineProps<FromItemProps>()
 const formContext = inject(formContextKey)
 console.log(formContext)
@@ -74,8 +76,17 @@ const validate = (trigger?:string)=>{
 
 }
 const context:FormItemContext = {
-  validate
+  validate,
+  prop:props.prop || ''
 }
+onMounted(()=>{
+  if(props.prop){
+    formContext?.addFiled(context)
+  }
+})
+onUnmounted(()=>{
+  formContext?.removeFiled(context)
+})
 provide(itemContextKey,context)
 </script>
 <template>
