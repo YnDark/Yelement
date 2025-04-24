@@ -212,6 +212,9 @@ const handleFetch = (query:any)=>{
     <Select :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
     <Select :remote="true" :remote-method="handleFetch" :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" placeholder="测试" :model-value="test"></Select>
   </div>
+  <div>
+
+  </div>
 </template>
 
 <style scoped>

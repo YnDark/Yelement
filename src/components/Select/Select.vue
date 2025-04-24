@@ -27,7 +27,8 @@ const states = reactive<SelectStates>({
   inputValue: initOption ? initOption.label : '',
   selectedOption: initOption,
   mouseHover: false,
-  loading: false
+  loading: false,
+  hightLightIndex: -1
 })
 const filteredPlaceholder = computed(() => {
   return (props.filterable && states.selectedOption && isDropDownShow.value) ? states.selectedOption.label : props.placeholder
@@ -47,6 +48,7 @@ const controlDropdwon = (show: boolean) => {
     if (props.filterable) {
       states.inputValue = states.selectedOption ? states.selectedOption.label : ''
     }
+    states.hightLightIndex = -1
   }
   isDropDownShow.value = show
   emits('visible-change', show)
@@ -114,6 +116,7 @@ const generateFilterOptions = async (searchValue: string) => {
   else {
     filteredOptions.value = props.options.filter(option => option.label.includes(searchValue))
   }
+  states.hightLightIndex = -1;
 }
 const onFilter = () => {
   generateFilterOptions(states.inputValue)
@@ -132,13 +135,59 @@ const timeOut = computed(()=>{
 const debounceOnFilter = debounce(()=>{
   onFilter()
 },timeOut.value)
+const handelKeydown = (e:KeyboardEvent)=>{
+  switch (e.key){
+    case 'Enter':
+      if(!isDropDownShow.value){
+        toggleDropdown()
+      }
+      else{
+        if(states.hightLightIndex > -1 && filteredOptions.value[states.hightLightIndex]){
+          itemSelect(filteredOptions.value[states.hightLightIndex])
+        }
+        else{
+          controlDropdwon(false)
+        }
+      }
+      break
+    case 'Escape':
+      if(isDropDownShow.value){
+        controlDropdwon(false)
+      }
+      break
+    case 'ArrowUp':
+      e.preventDefault()
+      if(filteredOptions.value.length >0){
+        if(states.hightLightIndex === -1 || states.hightLightIndex === 0){
+          states.hightLightIndex = filteredOptions.value.length - 1
+        }
+        else{
+          states.hightLightIndex --
+        }
+      }
+      break
+    case 'ArrowDown':
+      e.preventDefault()
+      if(filteredOptions.value.length >0){
+          if(states.hightLightIndex === -1 || states.hightLightIndex === filteredOptions.value.length-1){
+            states.hightLightIndex = 0
+          }
+          else{
+            states.hightLightIndex ++
+          }
+      }
+      break
+    default:
+      break
+  }
+}
 </script>
 <template>
   <div @mouseenter="states.mouseHover = true" @mouseleave="states.mouseHover = false" class="yd-select"
     :class="{ 'is-disabled': disabled }" @click="toggleDropdown">
     <Tooltip @click-outside="controlDropdwon(false)" :popper-options="popperOptions" ref="toolTipRef"
       placement="bottom-start" :manual="true">
-      <Input @input="debounceOnFilter" ref="inputInstance" :readonly="!filterable || !isDropDownShow"
+      <Input @keydown="handelKeydown" @input="debounceOnFilter" ref="inputInstance" :readonly="!filterable || !isDropDownShow"
         v-model="states.inputValue" :disabled="disabled" :placeholder="filteredPlaceholder">
       <template #suffix>
         <Icon @click.stop="clear" @mousedown.prevent="NOOP" icon="circle-xmark" v-if="showClearIcon"
@@ -156,7 +205,7 @@ const debounceOnFilter = debounce(()=>{
         <ul class="yd-select__menu" v-else>
           <template v-for="(item, index) in filteredOptions" :key="index">
             <li @click.stop='itemSelect(item)' class="yd-select__menu-item"
-              :class="{ 'is-disabled': item.disabled, 'is-selected': states.selectedOption?.value === item.value }"
+              :class="{'is-highted':states.hightLightIndex === index, 'is-disabled': item.disabled, 'is-selected': states.selectedOption?.value === item.value }"
               :id="`select-item-${item.value}`">
               <RenderVnode :v-node="renderLable ? renderLable(item) : item.label"></RenderVnode>
             </li>

@@ -25,7 +25,8 @@ export interface SelectStates {
   inputValue: string;
   selectedOption: null | SelectOption;
   mouseHover: boolean;
-    loading:Boolean;
+  loading: boolean;
+  hightLightIndex: number;
 }
 export interface SelectEmits {
   (e:'change', value: string) : void;
