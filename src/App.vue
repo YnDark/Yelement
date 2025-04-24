@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import Button from './components/Button/Button.vue'
 import type { ButtonInstance } from './components/Button/types.ts';
 import Collapse from './components/Collapse/Collapse.vue';
@@ -13,11 +13,13 @@ import type { Options } from '@popperjs/core'
 import type { ToolTipInstance } from './components/Tooltip/types';
 import Dropdown from './components/Dropdown/Dropdown.vue';
 import type { MenuOption } from './components/Dropdown/types';
-import {h} from 'vue'
+import { h } from 'vue'
 import { createMessage } from './components/Message/method';
 import Input from './components/Input/Input.vue';
 import Switch from './components/Switch/Switch.vue';
 import Select from './components/Select/Select.vue';
+import Form from './components/Form/Form.vue';
+import FormItem from './components/Form/FormItem.vue';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -28,11 +30,19 @@ const options: Partial<Options> = {
   strategy: 'absolute'
 }
 const dropdownOptions: MenuOption[] = [
-  {key:1,label:h('b','this is bold')},
-  {key:2,label:'item2',disabled:true},
-  {key:3,label:'item3',divided:true},
-  {key:4,label:'item4'}
+  { key: 1, label: h('b', 'this is bold') },
+  { key: 2, label: 'item2', disabled: true },
+  { key: 3, label: 'item3', divided: true },
+  { key: 4, label: 'item4' }
 ]
+const model = reactive({
+  email:'',
+  password:''
+})
+const rules = {
+  email: [{type: 'string', required:'true',trigger:'blur'}],
+  password: [{type: 'string', required:'true',trigger:'blur'}]
+}
 onMounted(() => {
   if (buttoni.value) {
     console.log(buttoni.value.ref)
@@ -47,32 +57,33 @@ onMounted(() => {
   if (tooltipRef.value) {
     console.log(tooltipRef)
   }
-  const instance = createMessage({message:'success',duration:0,type:'success',offset:10})
-  createMessage({message:'danger',duration:3000,type:'danger',offset:10})
-  createMessage({message:'info',duration:0,type:'info',offset:10})
-  createMessage({message:'warning',duration:0,type:'warning',offset:10})
-  createMessage({message:'success',duration:0,type:'success',offset:10})
+  const instance = createMessage({ message: 'success', duration: 0, type: 'success', offset: 10 })
+  createMessage({ message: 'danger', duration: 3000, type: 'danger', offset: 10 })
+  createMessage({ message: 'info', duration: 0, type: 'info', offset: 10 })
+  createMessage({ message: 'warning', duration: 0, type: 'warning', offset: 10 })
+  createMessage({ message: 'success', duration: 0, type: 'success', offset: 10 })
   setTimeout(() => {
     instance.destroy()
   }, 1000);
 })
 const innerValue = ref('right')
 import type { SelectOption } from './components/Select/types';
+
 const test = ref('1')
-const options2:SelectOption[] = [
-  {label: 'hello', value: "1"},
-  {label: 'hello2', value: "2"},
-  {label: 'hello3', value: "3"},
-  {label: 'hello4', value: "4"},
-  {label: 'hello5', value: "5", disabled:true}
+const options2: SelectOption[] = [
+  { label: 'hello', value: "1" },
+  { label: 'hello2', value: "2" },
+  { label: 'hello3', value: "3" },
+  { label: 'hello4', value: "4" },
+  { label: 'hello5', value: "5", disabled: true }
 ]
-const customRender = (option:SelectOption) => {
-  return h('div',{className:'xyz'},[h('b',option.label),h('span',option.value)])
+const customRender = (option: SelectOption) => {
+  return h('div', { className: 'xyz' }, [h('b', option.label), h('span', option.value)])
 }
-const handleFetch = (query:any)=>{
-  if(!query) return Promise.resolve([])
-  return fetch(`https://api.github.com/search/repositories?q=${query}`).then((res)=>res.json()).then(({items})=>{
-    return items.slice(0, 10).map((item:any) => ({label:item.name,value:item.node_id}))
+const handleFetch = (query: any) => {
+  if (!query) return Promise.resolve([])
+  return fetch(`https://api.github.com/search/repositories?q=${query}`).then((res) => res.json()).then(({ items }) => {
+    return items.slice(0, 10).map((item: any) => ({ label: item.name, value: item.node_id }))
   })
 }
 </script>
@@ -178,9 +189,10 @@ const handleFetch = (query:any)=>{
     </Alert>
   </div>
   <div>
-    <ToolTip placement="right" transition="fade" :open-delay="200" :close-delay="200" content="Hello Vue" trigger="hover" :popper-options="options"
-      ref="tooltipRef">
-      <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <ToolTip placement="right" transition="fade" :open-delay="200" :close-delay="200" content="Hello Vue"
+      trigger="hover" :popper-options="options" ref="tooltipRef">
+      <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125"
+        height="125" />
       <template #content>
         <div>Hello ToolTip</div>
       </template>
@@ -188,17 +200,18 @@ const handleFetch = (query:any)=>{
   </div>
   <div>
     <Dropdown transition="fade" :menu-options="dropdownOptions">
-      <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125" height="125" />
+      <img alt="Vue logo" style="border: 1px solid black;" class="logo" src="./assets/logo.svg" width="125"
+        height="125" />
     </Dropdown>
   </div>
   <div>
     <Input :showPassword="true" :modelValue="innerValue" type="text" :clearable="true">
-      <template #prepend>
-        prepend
-      </template>
-      <template #append>
-        append
-      </template>
+    <template #prepend>
+      prepend
+    </template>
+    <template #append>
+      append
+    </template>
     </Input>
     <Input :showPassword="true" :modelValue="innerValue" type="textarea" :clearable="true">
     </Input>
@@ -208,12 +221,32 @@ const handleFetch = (query:any)=>{
   </div>
   <div>
     <Select clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
-    <Select :render-lable="customRender" clearable :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
-    <Select :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" :options="options2" placeholder="测试" :model-value="test"></Select>
-    <Select :remote="true" :remote-method="handleFetch" :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" placeholder="测试" :model-value="test"></Select>
+    <Select :render-lable="customRender" clearable :disabled="false" :options="options2" placeholder="测试"
+      :model-value="test"></Select>
+    <Select :filterable="true" :render-lable="customRender" :clearable="false" :disabled="false" :options="options2"
+      placeholder="测试" :model-value="test"></Select>
+    <Select :remote="true" :remote-method="handleFetch" :filterable="true" :render-lable="customRender"
+      :clearable="false" :disabled="false" placeholder="测试" :model-value="test"></Select>
   </div>
   <div>
-
+    <Form :model="model" :rules="rules">
+      <FormItem label="测试" prop="email">
+        <template #label="{ label }">
+          <Button>{{ label }}</Button>
+        </template>
+        <Input v-model="model.email" :clearable="true">
+        </Input>
+      </FormItem>
+      <FormItem label="测试" prop="password">
+        <Input v-model="model.password" :showPassword="true" :clearable="true">
+        </Input>
+      </FormItem>
+      <FormItem label="测试" prop="email">
+        <template #default="{ validate }">
+          <input type="text" v-model="model.email" @blur="validate('blur')">
+        </template>
+      </FormItem>
+    </Form>
   </div>
 </template>
 

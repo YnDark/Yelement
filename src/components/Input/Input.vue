@@ -1,15 +1,20 @@
 <script setup lang='ts'>
 import type { InputEmits, InputProps } from './types';
-import { computed, type Ref, ref, useAttrs, watch, nextTick } from 'vue'
+import { computed, type Ref, ref, useAttrs, watch, nextTick, inject } from 'vue'
 import Icon from '../Icon/Icon.vue';
+import { itemContextKey } from '../Form/types';
 defineOptions({
   name: 'YdInput',
   inheritAttrs: false
 })
+const itemContext = inject(itemContextKey)
 const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   autocomplete: 'off'
 })
+const runValidation = (trigger?:string)=>{
+  itemContext?.validate()
+}
 const attr = useAttrs()
 const innerValue = ref(props.modelValue)
 const emits = defineEmits<InputEmits>()
@@ -27,9 +32,11 @@ watch(() => props.modelValue, (newValue) => {
 const handleInput = () => {
   emits('update:modelValue', innerValue.value)
   emits('input', innerValue.value)
+  runValidation('input')
 }
 const handleChange = () => {
   emits('change', innerValue.value)
+  runValidation('change')
 }
 const handleClear = () => {
   console.log('clear')
@@ -46,6 +53,7 @@ const handleFocus = (e: FocusEvent) => {
 const handleBlur = (e: FocusEvent) => {
   isFocus.value = false
   emits('blur', e)
+  runValidation('blur')
 }
 const handleShowPassword = () => {
   passwordVisible.value = true
