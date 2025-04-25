@@ -37,11 +37,15 @@ const dropdownOptions: MenuOption[] = [
 ]
 const model = reactive({
   email:'',
-  password:''
+  password:'',
+  confirmPwd:''
 })
 const rules = {
   email: [{type: 'string', required:'true',trigger:'blur'}],
-  password: [{type: 'string', required:'true',trigger:'blur'}]
+  password: [{type: 'string', required:'true',trigger:'blur'}],
+  confirmPwd: [{type: 'string', required:'true',trigger:'blur'},{
+    validator:(rule:any, value:any) => value === model.password,trigger:'blur',message:'两个密码必须相同'
+  }],
 }
 onMounted(() => {
   if (buttoni.value) {
@@ -85,6 +89,15 @@ const handleFetch = (query: any) => {
   return fetch(`https://api.github.com/search/repositories?q=${query}`).then((res) => res.json()).then(({ items }) => {
     return items.slice(0, 10).map((item: any) => ({ label: item.name, value: item.node_id }))
   })
+}
+const formRef = ref()
+const submit = async()=>{
+  try{
+    await formRef.value.validate()
+  }
+  catch(e){
+    console.log(e)
+  }
 }
 </script>
 
@@ -229,7 +242,7 @@ const handleFetch = (query: any) => {
       :clearable="false" :disabled="false" placeholder="测试" :model-value="test"></Select>
   </div>
   <div>
-    <Form :model="model" :rules="rules">
+    <Form ref="formRef" :model="model" :rules="rules" >
       <FormItem label="测试" prop="email">
         <template #label="{ label }">
           <Button>{{ label }}</Button>
@@ -241,11 +254,18 @@ const handleFetch = (query: any) => {
         <Input v-model="model.password" :showPassword="true" :clearable="true">
         </Input>
       </FormItem>
+      <FormItem label="测试" prop="confirmPwd">
+        <Input v-model="model.confirmPwd" :showPassword="true" :clearable="true">
+        </Input>
+      </FormItem>
       <FormItem label="测试" prop="email">
         <template #default="{ validate }">
           <input type="text" v-model="model.email" @blur="validate('blur')">
         </template>
       </FormItem>
+      <button @click.prevent="submit">提交</button>
+      <button @click.prevent="formRef.clearValidate">清除</button>
+      <button @click.prevent="formRef.resetFields">重置</button>
     </Form>
   </div>
 </template>

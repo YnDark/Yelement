@@ -1,0 +1,49 @@
+.yd-form{
+  --yd-form-label-font-size: var(--yd-font-size-base);
+  --yd-form-content-font-size: var(--yd-font-size-base);
+}
+.yd-form-item{
+  display: flex;
+  margin-bottom: 18px;
+  .yd-form-item__label{
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    font-size: var(--yd-font-size-base);
+    color: var(--yd-text-color-regular);
+  }
+  .yd-form-item__content {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    line-height: 32px;
+    font-size: var(--yd-form-content-font-size);
+    min-width: 0;
+    align-items: center;
+    position: relative;
+  }
+  .yd-form-item__error-msg{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 2px;
+    color: var(--yd-color-danger);
+    line-height: 1;
+    font-size: 12px;
+  }
+}
+.yd-form-item.is-error .yd-input__wrapper{
+  box-shadow: 0 0 0 1px var(--yd-color-danger) inset;
+}
+.yd-form-item.is-success .yd-input__wrapper{
+  box-shadow: 0 0 0 1px var(--yd-color-success) inset;
+}
+.yd-form-item.is-required > .yd-form-item__label::before{
+  content: "*";
+  color: var(--yd-color-danger);
+  margin-right: 4px;
+}

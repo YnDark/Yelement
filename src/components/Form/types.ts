@@ -24,7 +24,25 @@ export const formContextKey:InjectionKey<FormContext> = Symbol('formContextKey')
 export const itemContextKey:InjectionKey<FormItemContext> = Symbol('itemContextKey')
 
 export interface FormItemContext{
-  validate:(trigger?:string) => any,
-  prop: string
+  validate:(trigger?:string) => Promise<any>,
+  prop: string,
+  resetField(): void,
+  clearValidate(): void
+}
+export interface FormItemInstance{
+  validate:(trigger?:string) => Promise<any>,
+  resetField(): void,
+  clearValidate(): void,
+  validateStatus:ValidateStatus
+}
+export interface ValidateStatus{
+  state:'init' | 'success' | 'error' | 'loading',
+  loading:boolean,
+  errorMessage:string
+}
+export interface FormInstance {
+  validate: () => Promise<any>,
+  clearValidate:(props?:string[])=>void,
+  resetFields:(props?:string[])=>void,
 }
 

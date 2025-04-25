@@ -13,7 +13,9 @@ const props = withDefaults(defineProps<InputProps>(), {
   autocomplete: 'off'
 })
 const runValidation = (trigger?:string)=>{
-  itemContext?.validate()
+  itemContext?.validate(trigger).catch(e=>{
+    console.log(e.errors)
+  })
 }
 const attr = useAttrs()
 const innerValue = ref(props.modelValue)
