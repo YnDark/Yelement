@@ -3,7 +3,7 @@ import type { alertProps } from './types';
 import Icon from '../Icon/Icon.vue';
 import { ref } from 'vue';
 defineOptions({
-  name: 'alert'
+  name: 'YdAlert'
 })
 defineProps<alertProps>()
 const isShow = ref(true)

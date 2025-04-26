@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <button class="yd-button" :class="{
     [`yd-button--${type}`]: type,
@@ -30,7 +29,6 @@ withDefaults(defineProps<ButtonProps>(), {
   nativeType: 'button'
 })
 const _ref = ref<HTMLButtonElement>()
-
 defineExpose({
   ref: _ref
 })

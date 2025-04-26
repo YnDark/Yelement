@@ -4,6 +4,9 @@ import { createPopper, type Instance } from '@popperjs/core'
 import type { TooltipProps, TooltipEmits, ToolTipInstance } from './types';
 import useClickOutside from '@/hooks/useClickOutSide';
 import { debounce } from 'lodash-es'
+defineOptions({
+  name:'YdTooltip'
+})
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'bottom',
   trigger: 'hover',

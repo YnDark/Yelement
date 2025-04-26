@@ -7,6 +7,9 @@ import { computed, onMounted, type Ref, ref } from 'vue';
 import { getLastInstance,getLastBottomOffset } from './method';
 import { nextTick } from 'vue';
 import useEventLisener from '@/hooks/useEventLinsener';
+defineOptions({
+  name:'Ydmessage'
+})
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',
   duration: 3000,

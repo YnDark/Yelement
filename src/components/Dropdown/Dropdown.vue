@@ -2,8 +2,11 @@
 import type { DropdownEmits, DropdownProps, MenuOption, DropdownInstance } from './types';
 import Tooltip from '../Tooltip/Tooltip.vue';
 import { type Ref, ref } from 'vue';
-import { type ToolTipInstance } from '../Tooltip/types';
+import type{  ToolTipInstance } from '../Tooltip/types';
 import RenderVnode from '../Common/RenderVnode';
+defineOptions({
+  name:'YdDropdown'
+})
 const props = withDefaults(defineProps<DropdownProps>(),{
   hideAfterClick: true
 })

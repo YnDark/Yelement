@@ -3,7 +3,7 @@ import type { CollapseItemProps } from './types';
 import { inject,computed } from 'vue';
 import { collapseContextKey } from './types';
 import './style.css'
-import Icon from '../icon/Icon.vue'
+import Icon from '../Icon/Icon.vue'
 defineOptions({
   name:'yd-collapse-item'
 })
