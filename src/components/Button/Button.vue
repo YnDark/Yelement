@@ -15,16 +15,14 @@
     </span>
   </button>
 </template>
-<script lang="ts">
-import { defineComponent, withDefaults, ref } from 'vue';
+<script setup lang="ts">
+import { withDefaults, ref } from 'vue';
 import './style.css'
 import Icon from '../Icon/Icon.vue'
-export default defineComponent({
+import type { ButtonProps } from './types.ts'
+defineOptions({
   name: "YButton",
 })
-</script>
-<script setup lang="ts">
-import type { ButtonProps } from './types.ts'
 withDefaults(defineProps<ButtonProps>(), {
   nativeType: 'button'
 })
@@ -32,8 +30,6 @@ const _ref = ref<HTMLButtonElement>()
 defineExpose({
   ref: _ref
 })
-
-
 </script>
 <style scoped>
 </style>

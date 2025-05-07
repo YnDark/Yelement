@@ -2,10 +2,8 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import eslint from 'vite-plugin-eslint'
 import VueMacros from 'unplugin-vue-macros'
 import { resolve } from 'node:path';
-import dts from 'vite-plugin-dts'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -15,10 +13,6 @@ export default defineConfig({
         vueJsx: vueJsx(),
       },
     }),
-    eslint(),
-    dts({
-      tsconfigPath: './tsconfig.build.json'
-    })
   ],
   resolve: {
     alias: {
@@ -26,19 +20,21 @@ export default defineConfig({
     }
   },
   build: {
+    outDir: 'dist/umd',
     lib: {
-      entry: resolve(__dirname, 'src/main.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'Yelement',
       fileName: 'Yelement',
+      formats: ['umd']
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue','@fortawesome/free-solid-svg-icons','@fortawesome/fontawesome-svg-core','@fortawesome/vue-fontawesome'],
+      external: ['vue'],
       output: {
         exports: 'named',
         //定义全局变量名称
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
         },
         assetFileNames: (chunkInfo) => {
           if(chunkInfo.name === 'style.css'){
