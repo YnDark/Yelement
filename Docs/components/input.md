@@ -1,5 +1,5 @@
 ---
-title: Input | V-Element
+title: Input | Yelement
 description: Input 组件的文档
 ---
 
@@ -48,3 +48,30 @@ description: Input 组件的文档
 
 
 <demo vue="../demo/Input/Clear.vue" title="清空文本框" description="Input 清空文本框"></demo>
+
+### Input Attributes
+
+| Name         | Description                         | Type                           | Default |
+| ------------ | ----------------------------------- | ------------------------------ | ------- |
+| type         | 输入框类型                          | `string`                       | —       |
+| modelvalue   | 输入框绑定文本                      | `string`                       | —       |
+| size         | 输入框大小                          | `enum` - `'large'\| 'small'\|` | —       |
+| disabled     | 输入框是否禁用                      | `boolean`                      | false   |
+| clearable    | 输入框是否可清除                    | `boolean`                      | false   |
+| readonly     | 输入框是否只可读                    | `boolean`                      | false   |
+| showPassword | 输入框是否可切换文本可见性          | `boolean`                      | false   |
+| placeholder  | 输入框提示文本                      | `string`                       | —       |
+| autocomplete | 和input原生属性 `autocomplete` 相同 | `enum` - `'off'\| 'on'\|`      | off     |
+| autofocus    | 和input原生属性 `autofocus` 相同    | `boolean`                      | —       |
+| form         | 和button原生属性 `type` 相同        | `string`                       | —       |
+
+### Input Events
+
+| Name              | Description                         | Input                     | Output |
+| ----------------- | ----------------------------------- | ------------------------- | ------ |
+| update:modelValue | 输入框文本更新触发                  | `value:string`            | `void` |
+| input             | 输入框文本变化触发                  | `value:string`            | `void` |
+| change            | 输入框文本变化并且失去focus触发     | `value:string`            | `void` |
+| focus             | 输入框获取focus触发                 | `value:FocusEvent`        | `void` |
+| blur              | 输入框失去focus触发                 | `value:FocusEvent`        | `void` |
+| clear             | 输入框clear时触发                   | `void`                    | `void` |

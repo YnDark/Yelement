@@ -61,8 +61,8 @@
     "vite-plugin-eslint": "^1.8.1",
     "vitepress": "^1.6.3",
     "vitepress-demo-plugin": "^1.4.0",
+    "vitepress-plugin-search": "^1.0.4-alpha.22",
     "vitest": "^0.29.8",
     "vue-tsc": "^1.0.12"
   }
-  
 }

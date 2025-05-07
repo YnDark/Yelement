@@ -101,7 +101,7 @@ onUnmounted(()=>{
 })
 provide(itemContextKey,context)
 const isRequired = computed(()=>{
-  return itemRules.value.some((rule:any) => rule.required)
+  return itemRules.value ? itemRules.value.some((rule:any) => rule.required) : false
 })
 defineExpose<FormItemInstance>({
   validateStatus,

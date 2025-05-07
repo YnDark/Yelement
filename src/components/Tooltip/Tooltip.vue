@@ -120,7 +120,6 @@ defineExpose<ToolTipInstance>({
 })
 </script>
 <template>
-
   <div class="yd-tooltip" v-on="outterEvents" ref="popperContainerNode">
     <div class="yd-tooltip__trigger" ref="triggerNode" v-on="events">
       <slot></slot>

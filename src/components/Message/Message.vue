@@ -13,7 +13,8 @@ defineOptions({
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',
   duration: 3000,
-  offset: 0
+  offset: 0,
+  showClose: true
 })
 const prevInstance = getLastInstance()
 console.log(prevInstance)
@@ -85,7 +86,7 @@ defineExpose({bottomOffset,visible})
           <RenderVnode :vNode="message" v-if="message"></RenderVnode>
         </slot>
       </div>
-      <div class="yd-message__close">
+      <div class="yd-message__close" v-if="showClose">
         <Icon icon='xmark' @click.stop="visible = false" />
       </div>
     </div>

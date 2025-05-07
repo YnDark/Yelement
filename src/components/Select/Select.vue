@@ -7,7 +7,7 @@ import type { ToolTipInstance } from '../Tooltip/types';
 import type { InputInstance } from '../Input/types';
 import Icon from '../Icon/Icon.vue';
 import RenderVnode from '../Common/RenderVnode';
-import { isFunction,debounce } from 'lodash-es';
+import { isFunction, debounce } from 'lodash-es';
 defineOptions({
   name: 'YdSelect'
 })
@@ -129,52 +129,52 @@ const clear = () => {
   emits('update:modelValue', '')
 }
 const NOOP = () => { }
-const timeOut = computed(()=>{
+const timeOut = computed(() => {
   return props.remote ? 300 : 0
 })
-const debounceOnFilter = debounce(()=>{
+const debounceOnFilter = debounce(() => {
   onFilter()
-},timeOut.value)
-const handelKeydown = (e:KeyboardEvent)=>{
-  switch (e.key){
+}, timeOut.value)
+const handelKeydown = (e: KeyboardEvent) => {
+  switch (e.key) {
     case 'Enter':
-      if(!isDropDownShow.value){
+      if (!isDropDownShow.value) {
         toggleDropdown()
       }
-      else{
-        if(states.hightLightIndex > -1 && filteredOptions.value[states.hightLightIndex]){
+      else {
+        if (states.hightLightIndex > -1 && filteredOptions.value[states.hightLightIndex]) {
           itemSelect(filteredOptions.value[states.hightLightIndex])
         }
-        else{
+        else {
           controlDropdwon(false)
         }
       }
       break
     case 'Escape':
-      if(isDropDownShow.value){
+      if (isDropDownShow.value) {
         controlDropdwon(false)
       }
       break
     case 'ArrowUp':
       e.preventDefault()
-      if(filteredOptions.value.length >0){
-        if(states.hightLightIndex === -1 || states.hightLightIndex === 0){
+      if (filteredOptions.value.length > 0) {
+        if (states.hightLightIndex === -1 || states.hightLightIndex === 0) {
           states.hightLightIndex = filteredOptions.value.length - 1
         }
-        else{
-          states.hightLightIndex --
+        else {
+          states.hightLightIndex--
         }
       }
       break
     case 'ArrowDown':
       e.preventDefault()
-      if(filteredOptions.value.length >0){
-          if(states.hightLightIndex === -1 || states.hightLightIndex === filteredOptions.value.length-1){
-            states.hightLightIndex = 0
-          }
-          else{
-            states.hightLightIndex ++
-          }
+      if (filteredOptions.value.length > 0) {
+        if (states.hightLightIndex === -1 || states.hightLightIndex === filteredOptions.value.length - 1) {
+          states.hightLightIndex = 0
+        }
+        else {
+          states.hightLightIndex++
+        }
       }
       break
     default:
@@ -187,8 +187,9 @@ const handelKeydown = (e:KeyboardEvent)=>{
     :class="{ 'is-disabled': disabled }" @click="toggleDropdown">
     <Tooltip @click-outside="controlDropdwon(false)" :popper-options="popperOptions" ref="toolTipRef"
       placement="bottom-start" :manual="true">
-      <Input @keydown="handelKeydown" @input="debounceOnFilter" ref="inputInstance" :readonly="!filterable || !isDropDownShow"
-        v-model="states.inputValue" :disabled="disabled" :placeholder="filteredPlaceholder">
+      <Input @keydown="handelKeydown" @input="debounceOnFilter" ref="inputInstance"
+        :readonly="!filterable || !isDropDownShow" v-model="states.inputValue" :disabled="disabled"
+        :placeholder="filteredPlaceholder">
       <template #suffix>
         <Icon @click.stop="clear" @mousedown.prevent="NOOP" icon="circle-xmark" v-if="showClearIcon"
           class="yd-input__clear"></Icon>
@@ -205,7 +206,7 @@ const handelKeydown = (e:KeyboardEvent)=>{
         <ul class="yd-select__menu" v-else>
           <template v-for="(item, index) in filteredOptions" :key="index">
             <li @click.stop='itemSelect(item)' class="yd-select__menu-item"
-              :class="{'is-highted':states.hightLightIndex === index, 'is-disabled': item.disabled, 'is-selected': states.selectedOption?.value === item.value }"
+              :class="{ 'is-highted': states.hightLightIndex === index, 'is-disabled': item.disabled, 'is-selected': states.selectedOption?.value === item.value }"
               :id="`select-item-${item.value}`">
               <RenderVnode :v-node="renderLable ? renderLable(item) : item.label"></RenderVnode>
             </li>

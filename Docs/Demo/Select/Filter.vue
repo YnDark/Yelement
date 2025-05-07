@@ -10,6 +10,7 @@ const options = [
 ]
 </script>
 <template>
-  <Select v-model="test" placeholder="基础选择器，请选择" :options="options" />
-  <span>{{test}}</span>
+  <Select :filterable="true" :clearable="false" :disabled="false" :options="options"
+  placeholder="可输入文本过滤" v-model="test"></Select>
+  <span>{{ test }}</span>
 </template>

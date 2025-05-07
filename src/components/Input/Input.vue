@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   autocomplete: 'off'
 })
+console.log(props)
 const runValidation = (trigger?:string)=>{
   itemContext?.validate(trigger).catch(e=>{
     console.log(e.errors)

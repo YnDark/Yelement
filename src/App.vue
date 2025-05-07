@@ -36,15 +36,15 @@ const dropdownOptions: MenuOption[] = [
   { key: 4, label: 'item4' }
 ]
 const model = reactive({
-  email:'',
-  password:'',
-  confirmPwd:''
+  email: '',
+  password: '',
+  confirmPwd: ''
 })
 const rules = {
-  email: [{type: 'string', required:'true',trigger:'blur'}],
-  password: [{type: 'string', required:'true',trigger:'blur'}],
-  confirmPwd: [{type: 'string', required:'true',trigger:'blur'},{
-    validator:(rule:any, value:any) => value === model.password,trigger:'blur',message:'两个密码必须相同'
+  email: [{ type: 'string', required: 'true', trigger: 'blur' }],
+  password: [{ type: 'string', required: 'true', trigger: 'blur' }],
+  confirmPwd: [{ type: 'string', required: 'true', trigger: 'blur' }, {
+    validator: (rule: any, value: any) => value === model.password, trigger: 'blur', message: '两个密码必须相同'
   }],
 }
 onMounted(() => {
@@ -61,7 +61,7 @@ onMounted(() => {
   if (tooltipRef.value) {
     console.log(tooltipRef)
   }
-  const instance = createMessage({ message: 'success', duration: 0, type: 'success', offset: 10 })
+  const instance = createMessage({ message: 'success', duration: 0, type: 'success', offset: 10 ,showClose: false})
   createMessage({ message: 'danger', duration: 3000, type: 'danger', offset: 10 })
   createMessage({ message: 'info', duration: 0, type: 'info', offset: 10 })
   createMessage({ message: 'warning', duration: 0, type: 'warning', offset: 10 })
@@ -91,11 +91,11 @@ const handleFetch = (query: any) => {
   })
 }
 const formRef = ref()
-const submit = async()=>{
-  try{
+const submit = async () => {
+  try {
     await formRef.value.validate()
   }
-  catch(e){
+  catch (e) {
     console.log(e)
   }
 }
@@ -228,6 +228,8 @@ const submit = async()=>{
     </Input>
     <Input :showPassword="true" :modelValue="innerValue" type="textarea" :clearable="true">
     </Input>
+    <Input :showPassword="true" :modelValue="innerValue" :clearable="true" form="123">
+    </Input>
   </div>
   <div>
     <Switch inactive-text="左" active-text="右" v-model="innerValue" active-value="right" inactive-value="wrong"></Switch>
@@ -242,7 +244,7 @@ const submit = async()=>{
       :clearable="false" :disabled="false" placeholder="测试" :model-value="test"></Select>
   </div>
   <div>
-    <Form ref="formRef" :model="model" :rules="rules" >
+    <Form ref="formRef" :model="model" :rules="rules">
       <FormItem label="测试" prop="email">
         <template #label="{ label }">
           <Button>{{ label }}</Button>

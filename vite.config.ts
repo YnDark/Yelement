@@ -5,7 +5,15 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslint from 'vite-plugin-eslint'
 import VueMacros from 'unplugin-vue-macros'
-import { resolve } from 'node:path'
+
+// 默认选项
+const options = {
+  previewLength: 62,
+  buttonLabel: "Search",
+  placeholder: "Search docs",
+  allow: [],
+  ignore: [],
+};
 
 // https://vitejs.dev/config/
 export default defineConfig({

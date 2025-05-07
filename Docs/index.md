@@ -4,22 +4,22 @@ layout: home
 
 hero:
   name: "Yelement"
-  text: "description of Yelement"
-  tagline: My great project tagline
+  text: "基于vue3的组件库"
+  tagline: 依赖vue，使用vite构建的高性能、自定义通用组件库
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 开始
+      link: /start
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 文档
+      link: /examples
 
 features:
-  - title: Feature A
+  - title: 按需引入
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
+  - title: 二次封装图标库
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
+  - title: 统一样式动效管理
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
