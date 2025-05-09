@@ -20,6 +20,7 @@ export interface SelectProps {
   filterMethod?: CustomFilterFunc;
   remote?: Boolean;
   remoteMethod?: CustomFilterRemoteFunc;
+  maxHeight?: number;
 }
 export interface SelectStates {
   inputValue: string;

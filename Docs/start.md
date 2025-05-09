@@ -4,52 +4,36 @@
 ::: code-group
 
 ```js [config.js]
-/**
- * @type {import('vitepress').UserConfig}
- */
-const config = {
-  // ...
-}
+import { createApp } from 'vue'
+import App from './App.vue'
+import Yelement from 'yndarksy-element'
+import 'yndarksy-element/dist/index.css'
 
-export default config
+createApp(App).use(Yelement).mount('#app')
 ```
 
 ```ts [config.ts]
-import type { UserConfig } from 'vitepress'
+import { createApp } from 'vue'
+import App from './App.vue'
+import Yelement from 'yndarksy-element'
+import 'yndarksy-element/dist/index.css'
 
-const config: UserConfig = {
-  // ...
-}
-
-export default config
+createApp(App).use(Yelement).mount('#app')
 ```
 
 :::
 ## 按需引入
-
-### 自动导入
-### 手动导入
 ::: code-group
 
-```js [config.js]
-/**
- * @type {import('vitepress').UserConfig}
- */
-const config = {
-  // ...
-}
+```vue [component.vue]
+<script setup>
+import { Button } from 'yndarksy-element'
+import 'yndarksy-element/dist/index.css'
+</script>
 
-export default config
-```
-
-```ts [config.ts]
-import type { UserConfig } from 'vitepress'
-
-const config: UserConfig = {
-  // ...
-}
-
-export default config
+<template>
+  <Button type="danger">测试</Button>
+</template>
 ```
 
 :::

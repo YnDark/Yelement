@@ -15,12 +15,12 @@ import { ref } from 'vue'
     <thead>
       <tr>
         <th>版本</th>
-        <th><img src="https://cdn.jsdelivr.net/npm/@browser-logos/chrome/chrome_32x32.png" alt="Chrome"> <br> Chrome
+        <th><img src="./assets//image.png" alt="Chrome"> <br> Chrome
         </th>
-        <th><img src="https://cdn.jsdelivr.net/npm/@browser-logos/edge/edge_32x32.png" alt="IE"> <br> Edge</th>
-        <th><img src="https://cdn.jsdelivr.net/npm/@browser-logos/firefox/firefox_32x32.png" alt="Firefox"> <br> Firefox
+        <th><img src="./assets/edge_32x32.png" alt="Edge"> <br> Edge</th>
+        <th><img src="./assets/firefox_32x32.png" alt="Firefox"> <br> Firefox
         </th>
-        <th><img src="https://cdn.jsdelivr.net/npm/@browser-logos/safari/safari_32x32.png" alt="Safari"> <br> Safari
+        <th><img src="./assets/safari_32x32.png" alt="Safari"> <br> Safari
         </th>
       </tr>
     </thead>

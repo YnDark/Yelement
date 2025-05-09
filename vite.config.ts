@@ -4,8 +4,9 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslint from 'vite-plugin-eslint'
 import VueMacros from 'unplugin-vue-macros'
-import { resolve } from 'node:path';
+import { resolve } from 'node:path'
 import dts from 'vite-plugin-dts'
+import Components from 'unplugin-vue-components/vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -18,6 +19,14 @@ export default defineConfig({
     eslint(),
     dts({
       tsconfigPath: './tsconfig.build.json'
+    }),
+    Components({
+      resolvers: [
+        // 自动引入组件
+        (componentName) => {
+          return { name: componentName, from: 'yndarksy-element' };
+        },
+      ]
     })
   ],
   resolve: {

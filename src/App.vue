@@ -79,7 +79,7 @@ const options2: SelectOption[] = [
   { label: 'hello2', value: "2" },
   { label: 'hello3', value: "3" },
   { label: 'hello4', value: "4" },
-  { label: 'hello5', value: "5", disabled: true }
+  { label: 'hello5', value: "5", disabled: true },
 ]
 const customRender = (option: SelectOption) => {
   return h('div', { className: 'xyz' }, [h('b', option.label), h('span', option.value)])
@@ -134,7 +134,7 @@ const submit = async () => {
     <Button type="info" size="small" disabled>test button</Button>
   </div>
   <div>
-    <Collapse v-model="openValue">
+    <Collapse :according="true" v-model="openValue" >
       <CollapseItem name="a">
         <template #title>
           <h1>title1</h1>

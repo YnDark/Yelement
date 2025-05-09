@@ -27,17 +27,50 @@ export default defineConfig({
       }
     }
   },
-
+  head: [
+    // 添加图标
+    ['link', { rel: 'icon', href: '/a-simple-letter-y--facing-the-screen--with-a-solid.jpg' }]
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: '/a-simple-letter-y--facing-the-screen--with-a-solid.jpg',
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/examples' },
       { text: '安装', link: '/install' },
       { text: '开始', link: '/start' }
     ],
+    footer: {
+      // message: `<span href="https://github.com/YnDark/Yelement.git" target="_blank">链接</span>`,
+      copyright: `版权所有 © 2025-${new Date().getFullYear()}`,
+    },
     search: {
-      provider: "local",
+      provider: 'local',
+      //配置中文提示
+      options:{
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索'
+          },
+          modal: {
+            searchBoxPlaceholder: '搜索文档',
+            resetButtonTitle: '清除查询条件',
+            closeButtonAriaLabel: '关闭搜索',
+            noResultsText: '没有找到结果',
+            footer: {
+              selectText: '选择',
+              noResultsText: '未找到结果',
+              statsText: {
+                one: '1个结果',
+                other: '{n}个结果'
+              },
+              closeText: '关闭',
+              navigateText: '导航到结果'
+            }
+          }
+        }
+      }
     },
     //404页面的配置
     notFound: {

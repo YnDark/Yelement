@@ -14,6 +14,7 @@ import './styles/index.css'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
+// 安装插件
 library.add(fas)
 const components = [Message,FormItem,Form,Select,Switch,Button,Collapse,Icon,CollapseItem,Alert,ToolTip,Dropdown,Input]
 
