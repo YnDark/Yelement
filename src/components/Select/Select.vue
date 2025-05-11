@@ -8,6 +8,9 @@ import type { InputInstance } from '../Input/types';
 import Icon from '../Icon/Icon.vue';
 import RenderVnode from '../Common/RenderVnode';
 import { isFunction, debounce } from 'lodash-es';
+import { inject } from 'vue';
+import { itemContextKey } from '../Form';
+const itemContext = inject(itemContextKey)
 defineOptions({
   name: 'YdSelect'
 })
@@ -33,6 +36,11 @@ const states = reactive<SelectStates>({
 const filteredPlaceholder = computed(() => {
   return (props.filterable && states.selectedOption && isDropDownShow.value) ? states.selectedOption.label : props.placeholder
 })
+const runValidation = (trigger?:string)=>{
+  itemContext?.validate(trigger).catch(e=>{
+    console.log(e.errors)
+  })
+}
 const controlDropdwon = (show: boolean) => {
   if (show) {
     if (props.filterable && states.selectedOption) {
@@ -60,6 +68,7 @@ const toggleDropdown = () => {
   }
   else {
     controlDropdwon(true)
+    runValidation('select')
   }
 }
 const itemSelect = (e: SelectOption) => {

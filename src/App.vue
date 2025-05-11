@@ -260,6 +260,9 @@ const submit = async () => {
         <Input v-model="model.confirmPwd" :showPassword="true" :clearable="true">
         </Input>
       </FormItem>
+      <FormItem label="测试" prop="confirmPwd">
+        <Select clearable :disabled="false" :options="options2" placeholder="测试" v-model="model.confirmPwd"></Select>
+      </FormItem>
       <FormItem label="测试" prop="email">
         <template #default="{ validate }">
           <input type="text" v-model="model.email" @blur="validate('blur')">
