@@ -22,6 +22,9 @@
 ## 项目依赖
 Vue3、TypeScript、Vite
 
+## 项目文档
+http://yelement.yndarksy.fun/
+
 ## 项目使用教程
 
 ### 使用npm安装

@@ -133,5 +133,4 @@ defineExpose<ToolTipInstance>({
       </div>
     </transition>
   </div>
-
 </template>
