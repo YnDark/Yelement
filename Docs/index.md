@@ -22,8 +22,10 @@ features:
   - title: 统一样式、动效管理
     details: 通过postcss统一管理全局样式、组件样式、全局动效。
   - title: 性能强大
-    details: 组件通过防抖、节流增强组件性能。
+    details: 组件通过防抖、节流、虚拟滚动增强组件性能。
   - title: 键盘操作支持
     details: 组件通过支持通过键盘进行快捷操作，提高使用效率。
+  - title: 多模块规范支持
+    details: 支持ESM/CJS/UMD多模块规范。
 ---
 

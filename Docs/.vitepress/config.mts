@@ -95,6 +95,7 @@ export default defineConfig({
           {text: '开关（Switch）', link: '/components/switch' },
           {text: '消息（Message）', link: '/components/message' },
           {text: '下拉显示框（Tooltip）', link: '/components/tooltip' },
+          {text: '伸缩展示框（Collapse）', link: '/components/collapse' },
         ]
       },
       {
