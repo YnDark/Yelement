@@ -1,11 +1,11 @@
 <script setup lang='ts'>
+import Icon from '@/components/Icon/Icon.vue';
+import { computed, inject } from 'vue';
+import './style.css';
 import type { CollapseItemProps } from './types';
-import { inject,computed } from 'vue';
 import { collapseContextKey } from './types';
-import './style.css'
-import Icon from '../Icon/Icon.vue'
 defineOptions({
-  name:'yd-collapse-item'
+  name:'YCollapseItem'
 })
 const props = defineProps<CollapseItemProps>()
 const collapseContext = inject(collapseContextKey)

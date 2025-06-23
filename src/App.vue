@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
-import Button from './components/Button/Button.vue'
-import type { ButtonInstance } from './components/Button/types.ts';
-import Collapse from './components/Collapse/Collapse.vue';
-import Icon from './components/Icon/Icon.vue';
-import CollapseItem from './components/Collapse/CollapseItem.vue';
+import type { Options } from '@popperjs/core';
+import { createPopper } from '@popperjs/core';
+import { h, onMounted, reactive, ref } from 'vue';
 import Alert from './components/Alert/Alert.vue';
 import type { AlertInstance } from './components/Alert/types';
-import { createPopper } from '@popperjs/core';
-import ToolTip from './components/Tooltip/Tooltip.vue'
-import type { Options } from '@popperjs/core'
-import type { ToolTipInstance } from './components/Tooltip/types';
+import Button from './components/Button/Button.vue';
+import type { ButtonInstance } from './components/Button/types.ts';
+import Collapse from './components/Collapse/Collapse.vue';
+import CollapseItem from './components/Collapse/CollapseItem.vue';
 import Dropdown from './components/Dropdown/Dropdown.vue';
 import type { MenuOption } from './components/Dropdown/types';
-import { h } from 'vue'
-import { createMessage } from './components/Message/method';
-import Input from './components/Input/Input.vue';
-import Switch from './components/Switch/Switch.vue';
-import Select from './components/Select/Select.vue';
 import Form from './components/Form/Form.vue';
 import FormItem from './components/Form/FormItem.vue';
+import Icon from './components/Icon/Icon.vue';
+import Input from './components/Input/Input.vue';
+import { createMessage } from './components/Message/method';
+import Select from './components/Select/Select.vue';
+import type { SelectOption } from './components/Select/types';
+import Switch from './components/Switch/Switch.vue';
+import ToolTip from './components/Tooltip/Tooltip.vue';
+import type { ToolTipInstance } from './components/Tooltip/types';
 const buttoni = ref<ButtonInstance | null>(null)
 const alertInstance = ref<AlertInstance | null>(null)
 const openValue = ref([])
@@ -71,7 +71,6 @@ onMounted(() => {
   }, 1000);
 })
 const innerValue = ref('right')
-import type { SelectOption } from './components/Select/types';
 
 const test = ref('1')
 const options2: SelectOption[] = [

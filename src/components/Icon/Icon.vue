@@ -11,7 +11,7 @@ import { omit } from 'lodash-es';
 import './style.css'
 import { computed } from 'vue';
 defineOptions({
-  name: "Icon",
+  name: "YIcon",
   inheritAttrs: false
 })
 const props = defineProps<Iconprops>()

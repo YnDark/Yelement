@@ -9,7 +9,7 @@ import type { NameType,CollapseProps,CollapseEmits } from './types';
 import { collapseContextKey } from './types'
 import { ref,provide, warn,watch } from 'vue'
 defineOptions({
-  name:'YdCollapse'
+  name:'YCollapse'
 })
 const props = defineProps<CollapseProps>()
 const emits = defineEmits<CollapseEmits>()
@@ -42,4 +42,3 @@ provide(collapseContextKey,{
   handleItemClick
 })
 </script>
-

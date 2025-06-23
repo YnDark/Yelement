@@ -5,7 +5,7 @@ import type { TooltipProps, TooltipEmits, ToolTipInstance } from './types';
 import useClickOutside from '@/hooks/useClickOutSide';
 import { debounce } from 'lodash-es'
 defineOptions({
-  name:'YdTooltip'
+  name:'YTooltip'
 })
 const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'bottom',

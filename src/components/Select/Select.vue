@@ -1,18 +1,17 @@
 <script setup lang='ts'>
-import type { SelectProps, SelectOption, SelectEmits, SelectStates } from './types';
-import Tooltip from '../Tooltip/Tooltip.vue';
-import Input from '../Input/Input.vue';
-import { computed, reactive, type Ref, ref, watch } from 'vue'
-import type { ToolTipInstance } from '../Tooltip/types';
-import type { InputInstance } from '../Input/types';
-import Icon from '../Icon/Icon.vue';
+import Icon from '@/components/Icon/Icon.vue';
+import { debounce, isFunction } from 'lodash-es';
+import { computed, inject, reactive, type Ref, ref, watch } from 'vue';
 import RenderVnode from '../Common/RenderVnode';
-import { isFunction, debounce } from 'lodash-es';
-import { inject } from 'vue';
 import { itemContextKey } from '../Form';
+import Input from '../Input/Input.vue';
+import type { InputInstance } from '../Input/types';
+import Tooltip from '../Tooltip/Tooltip.vue';
+import type { ToolTipInstance } from '../Tooltip/types';
+import type { SelectEmits, SelectOption, SelectProps, SelectStates } from './types';
 const itemContext = inject(itemContextKey)
 defineOptions({
-  name: 'YdSelect'
+  name: 'YSelect'
 })
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => []
@@ -225,4 +224,3 @@ const handelKeydown = (e: KeyboardEvent) => {
     </Tooltip>
   </div>
 </template>
-

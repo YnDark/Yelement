@@ -1,9 +1,9 @@
 <script setup lang='ts'>
-import type { alertProps } from './types';
-import Icon from '../Icon/Icon.vue';
+import Icon from '@/components/Icon/Icon.vue';
 import { ref } from 'vue';
+import type { alertProps } from './types';
 defineOptions({
-  name: 'YdAlert'
+  name: 'YAlert'
 })
 defineProps<alertProps>()
 const isShow = ref(true)

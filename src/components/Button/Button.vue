@@ -16,10 +16,10 @@
   </button>
 </template>
 <script setup lang="ts">
-import { withDefaults, ref } from 'vue';
-import './style.css'
-import Icon from '../Icon/Icon.vue'
-import type { ButtonProps } from './types.ts'
+import Icon from '@/components/Icon/Icon.vue';
+import { ref, withDefaults } from 'vue';
+import './style.css';
+import type { ButtonProps } from './types.ts';
 defineOptions({
   name: "YButton",
 })

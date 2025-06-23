@@ -7,7 +7,7 @@ import Schema from 'async-validator';
 import type { FormValidateFailure } from './types';
 import type { FormItemContext,ValidateStatus,FormItemInstance } from './types'
 defineOptions({
-  name:'yd-form-item'
+  name:'YFormItem'
 })
 
 const props = defineProps<FromItemProps>()

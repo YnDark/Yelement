@@ -1,10 +1,10 @@
 <script setup lang='ts'>
-import type { InputEmits, InputProps } from './types';
-import { computed, type Ref, ref, useAttrs, watch, nextTick, inject } from 'vue'
-import Icon from '../Icon/Icon.vue';
+import Icon from '@/components/Icon/Icon.vue';
+import { computed, inject, nextTick, type Ref, ref, useAttrs, watch } from 'vue';
 import { itemContextKey } from '../Form/types';
+import type { InputEmits, InputProps } from './types';
 defineOptions({
-  name: 'YdInput',
+  name: 'YInput',
   inheritAttrs: false
 })
 const itemContext = inject(itemContextKey)

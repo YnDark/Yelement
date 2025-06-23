@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
-import Button from "./Button.vue";
-import { mount } from '@vue/test-utils'
+import Icon from "@/components/Icon/Icon.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import Icon from "../Icon/Icon.vue";
+import { mount } from '@vue/test-utils';
+import { describe, expect, test } from "vitest";
+import Button from "./Button.vue";
 describe('Button.vue',()=>{
   test('basic button',()=>{
     const wrapper = mount(Button,{

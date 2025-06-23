@@ -1,14 +1,14 @@
 <script setup lang='ts'>
-import type { MessageProps } from './types';
-import RenderVnode from '../Common/RenderVnode';
-import Icon from '../Icon/Icon.vue';
+import Icon from '@/components/Icon/Icon.vue';
 import { computed, onMounted, type Ref, ref } from 'vue';
+import RenderVnode from '../Common/RenderVnode';
+import type { MessageProps } from './types';
 
-import { getLastInstance,getLastBottomOffset } from './method';
-import { nextTick } from 'vue';
 import useEventLisener from '@/hooks/useEventLinsener';
+import { nextTick } from 'vue';
+import { getLastBottomOffset, getLastInstance } from './method';
 defineOptions({
-  name:'Ydmessage'
+  name:'YMessage'
 })
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',

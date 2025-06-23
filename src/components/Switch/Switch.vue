@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue';
 import type { SwtichProps,SwtichEmits } from './types'
 defineOptions({
-  name:'YdSwitch',
+  name:'YSwitch',
   inheritAttrs:false
 })
 const props = withDefaults(defineProps<SwtichProps>(),{
